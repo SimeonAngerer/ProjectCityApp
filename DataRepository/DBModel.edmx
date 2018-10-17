@@ -1,0 +1,685 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CityAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="PK_CategoryID" />
+          </Key>
+          <Property Name="PK_CategoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="PK_CompanyID" />
+          </Key>
+          <Property Name="PK_CompanyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Facebook" Type="varchar" MaxLength="50" />
+          <Property Name="FK_CategoryID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="PK_CustomerID" />
+          </Key>
+          <Property Name="PK_CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_UserID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="PK_DiscountID" />
+          </Key>
+          <Property Name="PK_DiscountID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entrepreneur">
+          <Key>
+            <PropertyRef Name="PK_EntrepreneurID" />
+          </Key>
+          <Property Name="PK_EntrepreneurID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_UserID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="PK_EventID" />
+          </Key>
+          <Property Name="PK_EventID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Follower">
+          <Key>
+            <PropertyRef Name="PK_FollowerID" />
+            <PropertyRef Name="FK_CompanyID" />
+            <PropertyRef Name="FK_CustomerID" />
+          </Key>
+          <Property Name="PK_FollowerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_CustomerID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PK_PromotionID" />
+          </Key>
+          <Property Name="PK_PromotionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Start" Type="datetime2" Precision="7" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" />
+          <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_DiscountID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="PK_UserID" />
+          </Key>
+          <Property Name="PK_UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Company_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="PK_CategoryID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="FK_CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="PK_UserID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrepreneur_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Entrepreneur">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrepreneur_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="PK_UserID" />
+            </Principal>
+            <Dependent Role="Entrepreneur">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follower_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follower_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="PK_CustomerID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="FK_CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Discount">
+          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="PK_DiscountID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="FK_DiscountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityAppModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entrepreneur" EntityType="Self.Entrepreneur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Follower" EntityType="Self.Follower" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Follower].[PK_FollowerID] AS [PK_FollowerID], 
+    [Follower].[FK_CompanyID] AS [FK_CompanyID], 
+    [Follower].[FK_CustomerID] AS [FK_CustomerID]
+    FROM [dbo].[Follower] AS [Follower]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrepreneur_Company" Association="Self.FK_Entrepreneur_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Entrepreneur" EntitySet="Entrepreneur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrepreneur_User" Association="Self.FK_Entrepreneur_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Entrepreneur" EntitySet="Entrepreneur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Company" Association="Self.FK_Event_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follower_Company" Association="Self.FK_Follower_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Follower" EntitySet="Follower" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follower_Customer" Association="Self.FK_Follower_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Follower" EntitySet="Follower" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Company" Association="Self.FK_Promotion_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
+            <End Role="Discount" EntitySet="Discount" />
+            <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CityAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="PK_CategoryID" />
+          </Key>
+          <Property Name="PK_CategoryID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Category" FromRole="Category" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="PK_CompanyID" />
+          </Key>
+          <Property Name="PK_CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CategoryID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Company_Category" FromRole="Company" ToRole="Category" />
+          <NavigationProperty Name="Entrepreneurs" Relationship="Self.FK_Entrepreneur_Company" FromRole="Company" ToRole="Entrepreneur" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Event_Company" FromRole="Company" ToRole="Event" />
+          <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_Company" FromRole="Company" ToRole="Follower" />
+          <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Company" FromRole="Company" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="PK_CustomerID" />
+          </Key>
+          <Property Name="PK_CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="FK_UserID" Type="Guid" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
+          <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_Customer" FromRole="Customer" ToRole="Follower" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="PK_DiscountID" />
+          </Key>
+          <Property Name="PK_DiscountID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Discount" FromRole="Discount" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Entrepreneur">
+          <Key>
+            <PropertyRef Name="PK_EntrepreneurID" />
+          </Key>
+          <Property Name="PK_EntrepreneurID" Type="Guid" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="FK_UserID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Entrepreneur_Company" FromRole="Entrepreneur" ToRole="Company" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Entrepreneur_User" FromRole="Entrepreneur" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="PK_EventID" />
+          </Key>
+          <Property Name="PK_EventID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Event_Company" FromRole="Event" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PK_PromotionID" />
+          </Key>
+          <Property Name="PK_PromotionID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Precision="7" />
+          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="FK_DiscountID" Type="Guid" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Promotion_Company" FromRole="Promotion" ToRole="Company" />
+          <NavigationProperty Name="Discount" Relationship="Self.FK_Promotion_Discount" FromRole="Promotion" ToRole="Discount" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="PK_UserID" />
+          </Key>
+          <Property Name="PK_UserID" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Entrepreneurs" Relationship="Self.FK_Entrepreneur_User" FromRole="User" ToRole="Entrepreneur" />
+        </EntityType>
+        <EntityType Name="Follower">
+          <Key>
+            <PropertyRef Name="PK_FollowerID" />
+            <PropertyRef Name="FK_CompanyID" />
+            <PropertyRef Name="FK_CustomerID" />
+          </Key>
+          <Property Name="PK_FollowerID" Type="Guid" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="FK_CustomerID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Follower_Company" FromRole="Follower" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Follower_Customer" FromRole="Follower" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Company_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="PK_CategoryID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="FK_CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrepreneur_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Entrepreneur">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follower_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="PK_UserID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follower_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="PK_CustomerID" />
+            </Principal>
+            <Dependent Role="Follower">
+              <PropertyRef Name="FK_CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promotion_Discount">
+          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="PK_DiscountID" />
+            </Principal>
+            <Dependent Role="Promotion">
+              <PropertyRef Name="FK_DiscountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrepreneur_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="PK_UserID" />
+            </Principal>
+            <Dependent Role="Entrepreneur">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Discounts" EntityType="Self.Discount" />
+          <EntitySet Name="Entrepreneurs" EntityType="Self.Entrepreneur" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Promotions" EntityType="Self.Promotion" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Followers" EntityType="Self.Follower" />
+          <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrepreneur_Company" Association="Self.FK_Entrepreneur_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Entrepreneur" EntitySet="Entrepreneurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Company" Association="Self.FK_Event_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follower_Company" Association="Self.FK_Follower_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Follower" EntitySet="Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Company" Association="Self.FK_Promotion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follower_Customer" Association="Self.FK_Follower_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Follower" EntitySet="Followers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
+            <End Role="Discount" EntitySet="Discounts" />
+            <End Role="Promotion" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrepreneur_User" Association="Self.FK_Entrepreneur_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Entrepreneur" EntitySet="Entrepreneurs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CityAppModelStoreContainer" CdmEntityContainer="CityAppEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="CityAppModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="PK_CategoryID" ColumnName="PK_CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="CityAppModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="PK_CompanyID" ColumnName="PK_CompanyID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="FK_CategoryID" ColumnName="FK_CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CityAppModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="PK_CustomerID" ColumnName="PK_CustomerID" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="CityAppModel.Discount">
+              <MappingFragment StoreEntitySet="Discount">
+                <ScalarProperty Name="PK_DiscountID" ColumnName="PK_DiscountID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entrepreneurs">
+            <EntityTypeMapping TypeName="CityAppModel.Entrepreneur">
+              <MappingFragment StoreEntitySet="Entrepreneur">
+                <ScalarProperty Name="PK_EntrepreneurID" ColumnName="PK_EntrepreneurID" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="CityAppModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="PK_EventID" ColumnName="PK_EventID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="CityAppModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="PK_PromotionID" ColumnName="PK_PromotionID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
+                <ScalarProperty Name="FK_DiscountID" ColumnName="FK_DiscountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CityAppModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CityAppModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="PK_UserID" ColumnName="PK_UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Followers">
+            <EntityTypeMapping TypeName="CityAppModel.Follower">
+              <MappingFragment StoreEntitySet="Follower">
+                <ScalarProperty Name="PK_FollowerID" ColumnName="PK_FollowerID" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
+                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
