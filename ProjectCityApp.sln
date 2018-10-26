@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCityApp", "ProjectCityApp\ProjectCityApp.csproj", "{48521DFA-DC2E-41DE-B11F-B7E358C47E35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedClasses", "SharedClasses\SharedClasses.csproj", "{F58B4AE0-5FCA-4CE8-A468-86EE4AE0BB29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedClasses", "SharedClasses\SharedClasses.csproj", "{F58B4AE0-5FCA-4CE8-A468-86EE4AE0BB29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RESTService", "RESTService\RESTService.csproj", "{AFB8B5E3-67EE-44FD-94FF-191E40A94376}"
 EndProject
@@ -22,6 +22,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|Any CPU.Build.0 = Debug|x86
+		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|ARM.ActiveCfg = Debug|ARM
 		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|ARM.Build.0 = Debug|ARM
 		{48521DFA-DC2E-41DE-B11F-B7E358C47E35}.Debug|ARM.Deploy.0 = Debug|ARM
