@@ -6,13 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Grid>
         <NavigationView Margin="0,12,0,0" Grid.Row="0" SelectionChanged="nvSample_SelectionChanged"
                 x:Name="nvSample"
                 IsSettingsVisible="True" IsTabStop="False" IsBackButtonVisible="Auto"
-                Header="Welcome to the CityApp">
+                Header="{Binding CurrentUser}">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Start" Tag="StartPage" >
                     <NavigationViewItem.Icon>

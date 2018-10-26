@@ -2,6 +2,11 @@
     x:Class="ProjectCityApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:ProjectCityApp.ViewModels"
     xmlns:local="using:ProjectCityApp">
-
+    <Application.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" />
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

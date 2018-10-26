@@ -27,10 +27,12 @@ namespace ProjectCityApp
         {
             this.InitializeComponent();
             contentFrame.Navigate(typeof(StartPage));
+            //Windows.Storage.ApplicationData.Current.LocalSettings.Values["exampleSetting"] = "Hello Windows";
         }
 
         private void nvSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            //string asdf = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["exampleSetting"];
             if (args.IsSettingsSelected)
             {
                 contentFrame.Navigate(typeof(SettingsPage));

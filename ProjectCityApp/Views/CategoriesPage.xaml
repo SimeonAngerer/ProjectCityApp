@@ -6,9 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Categories, Mode=OneWay, Source={StaticResource Locator}}">
 
-    <Grid>
-        <TextBlock Text="CategoriesPage" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <GridView ItemsSource="{Binding Categories}" Margin="5">
+        <GridView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Vertical">
+                    <Image Height="200" Width="300" Source="https://dummyimage.com/150x100/000000/fff.jpg" Margin="2" />
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />
+                </StackPanel>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+    </GridView>
 </Page>
