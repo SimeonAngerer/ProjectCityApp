@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace RESTService.Controllers
 {
-    public class CategoriesController : ApiController
+    public class CategoryController : ApiController
     {
         CityAppEntities model = new CityAppEntities();
 

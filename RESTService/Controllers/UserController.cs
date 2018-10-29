@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace RESTService.Controllers
 {
-    public class UsersController : ApiController
+    public class UserController : ApiController
     {
         CityAppEntities model = new CityAppEntities();
         public SharedUser Get(string userName, string password)

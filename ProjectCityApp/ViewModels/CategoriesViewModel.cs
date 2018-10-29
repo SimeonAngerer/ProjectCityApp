@@ -24,7 +24,7 @@ namespace ProjectCityApp.ViewModels
         public async void GetCategories()
         {
             HttpClient client = new HttpClient();
-            string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Categories"));
+            string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Category"));
 
             Categories = new ObservableCollection<SharedCategory>(JsonConvert.DeserializeObject<List<SharedCategory>>(res));
         }

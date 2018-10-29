@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace RESTService.Controllers
 {
-    public class CompaniesController : ApiController
+    public class CompanyController : ApiController
     {
         CityAppEntities model = new CityAppEntities();
       
@@ -68,18 +68,18 @@ namespace RESTService.Controllers
             }).ToList();
         }
 
-        public List<SharedEvent> GetEventsByCompanyID(Guid companyID)
+        public List<SharedCompany> GetCompaniesBySearchString(string searchString)
         {
-            return model.Events.Where(x => x.Company.PK_CompanyID == companyID).Select(x => new SharedEvent()
+            return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
                 City = x.City,
-                Date = x.Date,
-                EventID = x.PK_EventID,
+                CompanyID = x.PK_CompanyID,
+                Facebook = x.Facebook,
+                Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode
             }).ToList();
         }
-
     }
 }

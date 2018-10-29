@@ -195,10 +195,15 @@
     <Compile Include="Company.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\EntrepreneurController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
