@@ -68,7 +68,7 @@ namespace RESTService.Controllers
 
         #endregion
 
-        public List<SharedCompany> GetCompaniesWithPromotion(DateTime searchDate)
+        public IEnumerable<SharedCompany> GetCompaniesWithPromotion(DateTime searchDate)
         {
             return model.Companies.Where(x => x.Promotions.Count(y => y.Start <= searchDate && searchDate <= y.Expiration) >= 1).Select(x => new SharedCompany()
             {
@@ -80,10 +80,10 @@ namespace RESTService.Controllers
                 Street = x.Street,
                 ZipCode = x.Zipcode,
                 FK_CategoryID = x.FK_CategoryID
-            }).ToList();
+            });
         }
 
-        public List<SharedCompany> GetCompaniesByCategoryName(string categoryName)
+        public IEnumerable<SharedCompany> GetCompaniesByCategoryName(string categoryName)
         {
             return model.Companies.Where(x => x.Category.Name.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase)).Select(x => new SharedCompany()
             {
@@ -95,10 +95,10 @@ namespace RESTService.Controllers
                 Street = x.Street,
                 ZipCode = x.Zipcode,
                 FK_CategoryID = x.FK_CategoryID
-            }).ToList();
+            });
         }
 
-        public List<SharedCompany> GetCompaniesByCategoryID(Guid categoryID)
+        public IEnumerable<SharedCompany> GetCompaniesByCategoryID(Guid categoryID)
         {
             return model.Companies.Where(x => x.Category.PK_CategoryID == categoryID).Select(x => new SharedCompany()
             {
@@ -110,10 +110,10 @@ namespace RESTService.Controllers
                 Street = x.Street,
                 ZipCode = x.Zipcode,
                 FK_CategoryID = x.FK_CategoryID
-            }).ToList();
+            });
         }
 
-        public List<SharedCompany> GetCompaniesBySearchString(string searchString)
+        public IEnumerable<SharedCompany> GetCompaniesBySearchString(string searchString)
         {
             return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
@@ -125,7 +125,7 @@ namespace RESTService.Controllers
                 Street = x.Street,
                 ZipCode = x.Zipcode,
                 FK_CategoryID = x.FK_CategoryID
-            }).ToList();
+            });
         }
     }
 }

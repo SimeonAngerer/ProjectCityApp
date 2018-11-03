@@ -64,7 +64,7 @@ namespace RESTService.Controllers
 
         #endregion
 
-        public List<SharedEvent> GetEventsByCompanyID(Guid companyID)
+        public IEnumerable<SharedEvent> GetEventsByCompanyID(Guid companyID)
         {
             return model.Events.Where(x => x.Company.PK_CompanyID == companyID).Select(x => new SharedEvent()
             {
@@ -74,7 +74,7 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode
-            }).ToList();
+            });
         }
     }
 }

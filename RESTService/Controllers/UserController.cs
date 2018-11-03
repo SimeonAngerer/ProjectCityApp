@@ -82,7 +82,7 @@ namespace RESTService.Controllers
             }
         }
 
-        public List<SharedUser> GetByType(string type)
+        public IEnumerable<SharedUser> GetByType(string type)
         {
             if (type == "Entrepreneur")
             {
@@ -94,7 +94,7 @@ namespace RESTService.Controllers
                     Password = x.Password,
                     PK_UserID = x.PK_UserID,
                     UserName = x.UserName
-                }).ToList();
+                });
             }
             else if (type == "Customer")
             {
@@ -106,7 +106,7 @@ namespace RESTService.Controllers
                     Password = x.Password,
                     PK_UserID = x.PK_UserID,
                     UserName = x.UserName
-                }).ToList();
+                });
             }
             else
             {
