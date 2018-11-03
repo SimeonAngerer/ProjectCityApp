@@ -9,7 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding Promoted, Mode=OneWay, Source={StaticResource Locator}}">
 
-    <Grid>
-        <TextBlock Text="PromotedPage" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    </Grid>
+    <GridView ItemsSource="{Binding Companies}" Margin="5">
+        <GridView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Vertical">
+                    <Image Height="200" Width="300" Source="{Binding Image}" Margin="2" />
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />
+                </StackPanel>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+    </GridView>
 </Page>

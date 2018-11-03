@@ -70,7 +70,7 @@ namespace RESTService.Controllers
 
         public IEnumerable<SharedCompany> GetCompaniesWithPromotion(DateTime searchDate)
         {
-            return model.Companies.Where(x => x.Promotions.Count(y => y.Start <= searchDate && searchDate <= y.Expiration) >= 1).Select(x => new SharedCompany()
+            var asdf =  model.Companies.Where(x => x.Promotions.Count(y => y.Start <= searchDate && searchDate <= y.Expiration) >= 1).Select(x => new SharedCompany()
             {
                 City = x.City,
                 PK_CompanyID = x.PK_CompanyID,
@@ -81,6 +81,7 @@ namespace RESTService.Controllers
                 ZipCode = x.Zipcode,
                 FK_CategoryID = x.FK_CategoryID
             });
+            return asdf;
         }
 
         public IEnumerable<SharedCompany> GetCompaniesByCategoryName(string categoryName)
