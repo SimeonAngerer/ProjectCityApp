@@ -17,10 +17,10 @@ namespace RESTService
         public System.Guid PK_PromotionID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> Start { get; set; }
-        public Nullable<System.DateTime> Expiration { get; set; }
+        public System.DateTime Start { get; set; }
+        public System.DateTime Expiration { get; set; }
         public System.Guid FK_CompanyID { get; set; }
-        public Nullable<System.Guid> FK_DiscountID { get; set; }
+        public System.Guid FK_DiscountID { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Discount Discount { get; set; }

@@ -12,6 +12,8 @@ namespace RESTService.Controllers
     {
         CityAppEntities model = new CityAppEntities();
 
+        #region CRUD
+
         public IEnumerable<SharedEntrepreneur> Get()
         {
             return model.Entrepreneurs.Select(x => new SharedEntrepreneur()
@@ -53,5 +55,7 @@ namespace RESTService.Controllers
             model.Entrepreneurs.Remove(model.Entrepreneurs.SingleOrDefault(x => x.PK_EntrepreneurID == id));
             model.SaveChanges();
         }
+
+        #endregion
     }
 }

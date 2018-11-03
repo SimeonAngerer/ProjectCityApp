@@ -10,25 +10,50 @@ namespace RESTService.Controllers
 {
     public class CustomerController : ApiController
     {
-        // GET: api/Customer/5
-        public SharedCustomer GetCustomer(Guid id)
+        CityAppEntities model = new CityAppEntities();
+
+        #region CRUD
+
+        public IEnumerable<SharedCustomer> Get()
         {
-            throw new NotImplementedException();
+            return model.Customers.Select(x => new SharedCustomer()
+            {
+                FK_UserID = x.FK_UserID,
+                PK_CustomerID = x.PK_CustomerID
+            });
         }
 
-        // POST: api/Customer
-        public void PostNewCustomer([FromBody]SharedCustomer value)
+        public SharedCustomer Get(Guid id)
         {
+            var tempValue = model.Customers.SingleOrDefault(x => x.PK_CustomerID == id);
+
+            return new SharedCustomer()
+            {
+                FK_UserID = tempValue.FK_UserID,
+                PK_CustomerID = tempValue.PK_CustomerID
+            };
         }
 
-        // PUT: api/Customer/5
-        public void PutCustomer(Guid id, [FromBody]SharedCustomer value)
+        public void Post([FromBody]SharedCustomer value)
         {
+            model.Customers.Add(new Customer()
+            {
+                FK_UserID = value.FK_UserID,
+                PK_CustomerID = value.PK_CustomerID
+            });
+            model.SaveChanges();
         }
 
-        // DELETE: api/Customer/5
-        public void DeleteCustomer(Guid id)
+        //public void Put(Guid id, [FromBody]SharedCustomer value)
+        //{
+        //}
+
+        public void Delete(Guid id)
         {
+            model.Customers.Remove(model.Customers.SingleOrDefault(x => x.PK_CustomerID == id));
+            model.SaveChanges();
         }
+
+        #endregion
     }
 }

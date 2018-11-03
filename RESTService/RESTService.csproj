@@ -201,6 +201,7 @@
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\EntrepreneurController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -253,8 +254,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
       <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

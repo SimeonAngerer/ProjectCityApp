@@ -10,7 +10,7 @@ namespace SharedClasses
     {
         public Guid PK_CompanyID { get; set; }
         public string Name { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
         public string Street { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }

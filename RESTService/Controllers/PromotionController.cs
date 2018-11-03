@@ -12,6 +12,8 @@ namespace RESTService.Controllers
     {
         CityAppEntities model = new CityAppEntities();
 
+        #region CRUD
+
         public IEnumerable<SharedPromotion> Get()
         {
             return model.Promotions.Select(x => new SharedPromotion()
@@ -58,7 +60,7 @@ namespace RESTService.Controllers
 
         public void Put(Guid id, [FromBody]SharedPromotion value)
         {
-            var tempValue = Get(id);
+            var tempValue = model.Promotions.SingleOrDefault(x => x.PK_PromotionID == id);
 
             if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
             if (value.Expiration != DateTime.MinValue) { tempValue.Expiration = value.Expiration; }
@@ -73,5 +75,7 @@ namespace RESTService.Controllers
             model.Promotions.Remove(model.Promotions.SingleOrDefault(x => x.PK_PromotionID == id));
             model.SaveChanges();
         }
+
+        #endregion
     }
 }

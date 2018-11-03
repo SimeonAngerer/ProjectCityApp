@@ -31,8 +31,8 @@ namespace RESTService
         public virtual DbSet<Discount> Discounts { get; set; }
         public virtual DbSet<Entrepreneur> Entrepreneurs { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Follower> Followers { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Follower> Followers { get; set; }
     }
 }

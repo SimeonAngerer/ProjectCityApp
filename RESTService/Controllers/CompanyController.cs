@@ -11,8 +11,10 @@ namespace RESTService.Controllers
     public class CompanyController : ApiController
     {
         CityAppEntities model = new CityAppEntities();
-      
-        public List<SharedCompany> GetAllCompanies()
+
+        #region CRUD
+
+        public IEnumerable<SharedCompany> Get()
         {
             return model.Companies.Select(x => new SharedCompany()
             {
@@ -26,6 +28,45 @@ namespace RESTService.Controllers
                 FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
+
+        public void Post([FromBody]SharedCompany value)
+        {
+            model.Companies.Add(new Company()
+            {
+                City = value.City,
+                Facebook = value.Facebook,
+                FK_CategoryID = value.FK_CategoryID,
+                Image = value.Image,
+                Name = value.Name,
+                PK_CompanyID = value.PK_CompanyID,
+                Street = value.Street,
+                Zipcode = value.ZipCode
+            });
+
+            model.SaveChanges();
+        }
+
+        public void Put(Guid id, [FromBody]SharedCompany value)
+        {
+            var tempValue = model.Companies.SingleOrDefault(x => x.PK_CompanyID == id);
+
+            if (!String.IsNullOrEmpty(value.City)) { tempValue.City = value.City; }
+            if (!String.IsNullOrEmpty(value.Facebook)) { tempValue.Facebook = value.Facebook; }
+            if (!String.IsNullOrEmpty(value.Image)) { tempValue.Image = value.Image; }
+            if (!String.IsNullOrEmpty(value.Name)) { tempValue.Name = value.Name; }
+            if (!String.IsNullOrEmpty(value.Street)) { tempValue.Street = value.Street; }
+            if (!String.IsNullOrEmpty(value.ZipCode)) { tempValue.Zipcode = value.ZipCode; }
+
+            model.SaveChanges();
+        }
+
+        public void Delete(Guid id)
+        {
+            model.Companies.Remove(model.Companies.SingleOrDefault(x => x.PK_CompanyID == id));
+            model.SaveChanges();
+        }
+
+        #endregion
 
         public List<SharedCompany> GetCompaniesWithPromotion(DateTime searchDate)
         {

@@ -11,6 +11,7 @@
           </Key>
           <Property Name="PK_CategoryID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -18,7 +19,7 @@
           </Key>
           <Property Name="PK_CompanyID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Image" Type="image" />
+          <Property Name="Image" Type="varchar(max)" />
           <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
@@ -30,7 +31,7 @@
             <PropertyRef Name="PK_CustomerID" />
           </Key>
           <Property Name="PK_CustomerID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_UserID" Type="uniqueidentifier" />
+          <Property Name="FK_UserID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Discount">
           <Key>
@@ -39,7 +40,7 @@
           <Property Name="PK_DiscountID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Entrepreneur">
           <Key>
@@ -61,13 +62,9 @@
           <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Follower">
           <Key>
             <PropertyRef Name="PK_FollowerID" />
-            <PropertyRef Name="FK_CompanyID" />
-            <PropertyRef Name="FK_CustomerID" />
           </Key>
           <Property Name="PK_FollowerID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
@@ -80,10 +77,10 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <Property Name="PK_PromotionID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
-          <Property Name="Start" Type="datetime2" Precision="7" />
-          <Property Name="Expiration" Type="datetime2" Precision="7" />
+          <Property Name="Start" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_DiscountID" Type="uniqueidentifier" />
+          <Property Name="FK_DiscountID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -109,7 +106,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -193,7 +190,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Promotion_Discount">
-          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
           <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discount">
@@ -211,15 +208,9 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Entrepreneur" EntityType="Self.Entrepreneur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Follower" EntityType="Self.Follower" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Follower" EntityType="Self.Follower" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Follower].[PK_FollowerID] AS [PK_FollowerID], 
-    [Follower].[FK_CompanyID] AS [FK_CompanyID], 
-    [Follower].[FK_CustomerID] AS [FK_CustomerID]
-    FROM [dbo].[Follower] AS [Follower]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Company" EntitySet="Company" />
@@ -268,6 +259,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </Key>
           <Property Name="PK_CategoryID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Category" FromRole="Category" ToRole="Company" />
         </EntityType>
         <EntityType Name="Company">
@@ -276,7 +268,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </Key>
           <Property Name="PK_CompanyID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -293,7 +285,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
             <PropertyRef Name="PK_CustomerID" />
           </Key>
           <Property Name="PK_CustomerID" Type="Guid" Nullable="false" />
-          <Property Name="FK_UserID" Type="Guid" />
+          <Property Name="FK_UserID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_Customer" FromRole="Customer" ToRole="Follower" />
         </EntityType>
@@ -304,7 +296,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <Property Name="PK_DiscountID" Type="Guid" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Discount" FromRole="Discount" ToRole="Promotion" />
         </EntityType>
         <EntityType Name="Entrepreneur">
@@ -330,6 +322,16 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Event_Company" FromRole="Event" ToRole="Company" />
         </EntityType>
+        <EntityType Name="Follower">
+          <Key>
+            <PropertyRef Name="PK_FollowerID" />
+          </Key>
+          <Property Name="PK_FollowerID" Type="Guid" Nullable="false" />
+          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
+          <Property Name="FK_CustomerID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Follower_Company" FromRole="Follower" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Follower_Customer" FromRole="Follower" ToRole="Customer" />
+        </EntityType>
         <EntityType Name="Promotion">
           <Key>
             <PropertyRef Name="PK_PromotionID" />
@@ -337,10 +339,10 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <Property Name="PK_PromotionID" Type="Guid" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Start" Type="DateTime" Precision="7" />
-          <Property Name="Expiration" Type="DateTime" Precision="7" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="FK_DiscountID" Type="Guid" />
+          <Property Name="FK_DiscountID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Promotion_Company" FromRole="Promotion" ToRole="Company" />
           <NavigationProperty Name="Discount" Relationship="Self.FK_Promotion_Discount" FromRole="Promotion" ToRole="Discount" />
         </EntityType>
@@ -356,18 +358,6 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
           <NavigationProperty Name="Entrepreneurs" Relationship="Self.FK_Entrepreneur_User" FromRole="User" ToRole="Entrepreneur" />
-        </EntityType>
-        <EntityType Name="Follower">
-          <Key>
-            <PropertyRef Name="PK_FollowerID" />
-            <PropertyRef Name="FK_CompanyID" />
-            <PropertyRef Name="FK_CustomerID" />
-          </Key>
-          <Property Name="PK_FollowerID" Type="Guid" Nullable="false" />
-          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="FK_CustomerID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Follower_Company" FromRole="Follower" ToRole="Company" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Follower_Customer" FromRole="Follower" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_Company_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -430,7 +420,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -454,7 +444,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Promotion_Discount">
-          <End Role="Discount" Type="Self.Discount" Multiplicity="0..1" />
+          <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
           <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discount">
@@ -484,9 +474,9 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
           <EntitySet Name="Entrepreneurs" EntityType="Self.Entrepreneur" />
           <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Followers" EntityType="Self.Follower" />
           <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Company" EntitySet="Companies" />
@@ -535,6 +525,7 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="PK_CategoryID" ColumnName="PK_CategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -592,6 +583,15 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Followers">
+            <EntityTypeMapping TypeName="CityAppModel.Follower">
+              <MappingFragment StoreEntitySet="Follower">
+                <ScalarProperty Name="PK_FollowerID" ColumnName="PK_FollowerID" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
+                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
             <EntityTypeMapping TypeName="CityAppModel.Promotion">
               <MappingFragment StoreEntitySet="Promotion">
@@ -614,15 +614,6 @@ warning 6002: The table/view 'CityApp.dbo.Follower' does not have a primary key 
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Followers">
-            <EntityTypeMapping TypeName="CityAppModel.Follower">
-              <MappingFragment StoreEntitySet="Follower">
-                <ScalarProperty Name="PK_FollowerID" ColumnName="PK_FollowerID" />
-                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
-                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
