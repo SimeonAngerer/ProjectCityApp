@@ -67,5 +67,18 @@ namespace RESTService.Controllers
         }
 
         #endregion
+
+        public SharedDiscount GetDiscountByPromotion(Guid promotionID)
+        {
+            var tempValue = model.Promotions.SingleOrDefault(x => x.PK_PromotionID == promotionID);
+
+            return new SharedDiscount()
+            {
+                Code = tempValue.Discount.Code,
+                Description = tempValue.Discount.Description,
+                PK_DiscountID = tempValue.Discount.PK_DiscountID,
+                Title = tempValue.Discount.Title
+            };
+        }
     }
 }

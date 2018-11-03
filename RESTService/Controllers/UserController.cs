@@ -113,5 +113,18 @@ namespace RESTService.Controllers
                 return null;
             }
         }
+
+        public IEnumerable<SharedUser> GetFollowerByCompanyId(Guid id)
+        {
+            return model.Followers.Where(x => x.FK_CompanyID == id).Select(x => new SharedUser()
+            {
+                DateOfBirth = x.Customer.User.DateOfBirth,
+                FirstName = x.Customer.User.FirstName,
+                LastName = x.Customer.User.LastName,
+                //Password = x.Customer.User.Password,
+                PK_UserID = x.Customer.User.PK_UserID,
+                UserName = x.Customer.User.UserName
+            });
+        }
     }
 }

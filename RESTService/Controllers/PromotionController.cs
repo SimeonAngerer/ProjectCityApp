@@ -77,5 +77,33 @@ namespace RESTService.Controllers
         }
 
         #endregion
+
+        public IEnumerable<SharedPromotion> GetPromotionByCompanyID(Guid id)
+        {
+            return model.Promotions.Where(x => x.FK_CompanyID == id).Select(x => new SharedPromotion()
+            {
+                Description = x.Description,
+                Expiration = x.Expiration,
+                FK_CompanyID = x.FK_CompanyID,
+                FK_DiscountID = x.FK_DiscountID,
+                PK_PromotionID = x.PK_PromotionID,
+                Start = x.Start,
+                Title = x.Title
+            });
+        }
+
+        public IEnumerable<SharedPromotion> GetPromotionsInTimeSpan(DateTime date)
+        {
+            return model.Promotions.Where(x => x.Start <= date && date <= x.Expiration).Select(x => new SharedPromotion()
+            {
+                Description = x.Description,
+                Expiration = x.Expiration,
+                FK_CompanyID = x.FK_CompanyID,
+                FK_DiscountID = x.FK_DiscountID,
+                PK_PromotionID = x.PK_PromotionID,
+                Start = x.Start,
+                Title = x.Title
+            });
+        }
     }
 }

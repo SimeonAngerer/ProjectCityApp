@@ -127,5 +127,20 @@ namespace RESTService.Controllers
                 FK_CategoryID = x.FK_CategoryID
             });
         }
+
+        public IEnumerable<SharedCompany> GetFollowedCompaniesByUser(Guid userID)
+        {
+            return model.Followers.Where(x => x.Customer.User.PK_UserID == userID).Select(x => new SharedCompany()
+            {
+                City = x.Company.City,
+                PK_CompanyID = x.Company.PK_CompanyID,
+                Facebook = x.Company.Facebook,
+                Image = x.Company.Image,
+                Name = x.Company.Name,
+                Street = x.Company.Street,
+                ZipCode = x.Company.Zipcode,
+                FK_CategoryID = x.Company.FK_CategoryID
+            });
+        }
     }
 }
