@@ -17,12 +17,13 @@ namespace RESTService.Controllers
             return model.Companies.Select(x => new SharedCompany()
             {
                 City = x.City,
-                CompanyID = x.PK_CompanyID,
+                PK_CompanyID = x.PK_CompanyID,
                 Facebook = x.Facebook,
                 Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
-                ZipCode = x.Zipcode
+                ZipCode = x.Zipcode,
+                FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
 
@@ -31,12 +32,13 @@ namespace RESTService.Controllers
             return model.Companies.Where(x => x.Promotions.Count(y => y.Start <= searchDate && searchDate <= y.Expiration) >= 1).Select(x => new SharedCompany()
             {
                 City = x.City,
-                CompanyID = x.PK_CompanyID,
+                PK_CompanyID = x.PK_CompanyID,
                 Facebook = x.Facebook,
                 Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
-                ZipCode = x.Zipcode
+                ZipCode = x.Zipcode,
+                FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
 
@@ -45,12 +47,13 @@ namespace RESTService.Controllers
             return model.Companies.Where(x => x.Category.Name.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase)).Select(x => new SharedCompany()
             {
                 City = x.City,
-                CompanyID = x.PK_CompanyID,
+                PK_CompanyID = x.PK_CompanyID,
                 Facebook = x.Facebook,
                 Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
-                ZipCode = x.Zipcode
+                ZipCode = x.Zipcode,
+                FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
 
@@ -59,12 +62,13 @@ namespace RESTService.Controllers
             return model.Companies.Where(x => x.Category.PK_CategoryID == categoryID).Select(x => new SharedCompany()
             {
                 City = x.City,
-                CompanyID = x.PK_CompanyID,
+                PK_CompanyID = x.PK_CompanyID,
                 Facebook = x.Facebook,
                 Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
-                ZipCode = x.Zipcode
+                ZipCode = x.Zipcode,
+                FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
 
@@ -73,12 +77,13 @@ namespace RESTService.Controllers
             return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
                 City = x.City,
-                CompanyID = x.PK_CompanyID,
+                PK_CompanyID = x.PK_CompanyID,
                 Facebook = x.Facebook,
                 Image = x.Image,
                 Name = x.Name,
                 Street = x.Street,
-                ZipCode = x.Zipcode
+                ZipCode = x.Zipcode,
+                FK_CategoryID = x.FK_CategoryID
             }).ToList();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +10,48 @@ namespace RESTService.Controllers
 {
     public class EntrepreneurController : ApiController
     {
-        // GET: api/Entrepreneur
-        public IEnumerable<string> Get()
+        CityAppEntities model = new CityAppEntities();
+
+        public IEnumerable<SharedEntrepreneur> Get()
         {
-            return new string[] { "value1", "value2" };
+            return model.Entrepreneurs.Select(x => new SharedEntrepreneur()
+            {
+                FK_CompanyID = x.FK_CompanyID,
+                FK_UserID = x.FK_UserID,
+                PK_EntrepreneurID = x.PK_EntrepreneurID
+            });
         }
 
-        // GET: api/Entrepreneur/5
-        public string Get(int id)
+        public SharedEntrepreneur Get(Guid id)
         {
-            return "value";
+            var tempValue = model.Entrepreneurs.SingleOrDefault(x => x.PK_EntrepreneurID == id);
+            return new SharedEntrepreneur()
+            {
+                FK_CompanyID = tempValue.FK_CompanyID,
+                FK_UserID = tempValue.FK_UserID,
+                PK_EntrepreneurID = tempValue.PK_EntrepreneurID
+            };
         }
 
-        // POST: api/Entrepreneur
-        public void Post([FromBody]string value)
+        public void Post([FromBody]SharedEntrepreneur value)
         {
+            model.Entrepreneurs.Add(new Entrepreneur()
+            {
+                FK_CompanyID = value.FK_CompanyID,
+                FK_UserID = value.FK_UserID,
+                PK_EntrepreneurID = value.PK_EntrepreneurID
+            });
+            model.SaveChanges();
         }
 
-        // PUT: api/Entrepreneur/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //public void Put(Guid id, [FromBody]SharedEntrepreneur value)
+        //{
+        //}
 
-        // DELETE: api/Entrepreneur/5
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            model.Entrepreneurs.Remove(model.Entrepreneurs.SingleOrDefault(x => x.PK_EntrepreneurID == id));
+            model.SaveChanges();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace RESTService.Controllers
             {
                 City = x.City,
                 Date = x.Date,
-                EventID = x.PK_EventID,
+                PK_EventID = x.PK_EventID,
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode

@@ -16,7 +16,7 @@ namespace RESTService.Controllers
         {
             return model.Categories.Select(x => new SharedCategory()
             {
-                CategoryID = x.PK_CategoryID,
+                PK_CategoryID = x.PK_CategoryID,
                 Name = x.Name
             }).ToList();
         }

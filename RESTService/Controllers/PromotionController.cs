@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +10,68 @@ namespace RESTService.Controllers
 {
     public class PromotionController : ApiController
     {
-        // GET: api/Promotion
-        public IEnumerable<string> Get()
+        CityAppEntities model = new CityAppEntities();
+
+        public IEnumerable<SharedPromotion> Get()
         {
-            return new string[] { "value1", "value2" };
+            return model.Promotions.Select(x => new SharedPromotion()
+            {
+                Description = x.Description,
+                Expiration = x.Expiration,
+                FK_CompanyID = x.FK_CompanyID,
+                FK_DiscountID = x.FK_DiscountID,
+                PK_PromotionID = x.PK_PromotionID,
+                Start = x.Start,
+                Title = x.Title
+            });
         }
 
-        // GET: api/Promotion/5
-        public string Get(int id)
+        public SharedPromotion Get(Guid id)
         {
-            return "value";
+            var tempValue = model.Promotions.SingleOrDefault(x => x.PK_PromotionID == id);
+            return new SharedPromotion()
+            {
+                Description = tempValue.Description,
+                Expiration = tempValue.Expiration,
+                FK_CompanyID = tempValue.FK_CompanyID,
+                FK_DiscountID = tempValue.FK_DiscountID,
+                PK_PromotionID = tempValue.PK_PromotionID,
+                Start = tempValue.Start,
+                Title = tempValue.Title
+            };
         }
 
-        // POST: api/Promotion
-        public void Post([FromBody]string value)
+        public void Post([FromBody]SharedPromotion value)
         {
+            model.Promotions.Add(new Promotion()
+            {
+                Description = value.Description,
+                Expiration = value.Expiration,
+                FK_CompanyID = value.FK_CompanyID,
+                FK_DiscountID = value.FK_DiscountID,
+                PK_PromotionID = value.PK_PromotionID,
+                Start = value.Start,
+                Title = value.Title
+            });
+            model.SaveChanges();
         }
 
-        // PUT: api/Promotion/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(Guid id, [FromBody]SharedPromotion value)
         {
+            var tempValue = Get(id);
+
+            if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
+            if (value.Expiration != DateTime.MinValue) { tempValue.Expiration = value.Expiration; }
+            if (value.Start != DateTime.MinValue) { tempValue.Start = value.Start; }
+            if (!String.IsNullOrEmpty(value.Title)) { tempValue.Title = value.Title; }
+
+            model.SaveChanges();
         }
 
-        // DELETE: api/Promotion/5
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
+            model.Promotions.Remove(model.Promotions.SingleOrDefault(x => x.PK_PromotionID == id));
+            model.SaveChanges();
         }
     }
 }

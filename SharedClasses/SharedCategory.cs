@@ -8,7 +8,7 @@ namespace SharedClasses
 {
     public class SharedCategory
     {
-        public Guid CategoryID { get; set; }
+        public Guid PK_CategoryID { get; set; }
         public string Name { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace SharedClasses
 {
     public class SharedCustomer
     {
-        public Guid CustomerID { get; set; }
+        public Guid PK_CustomerID { get; set; }
+        public Guid FK_UserID { get; set; }
     }
 }

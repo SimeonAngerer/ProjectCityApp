@@ -8,6 +8,8 @@ namespace SharedClasses
 {
     public class SharedEntrepreneur
     {
-        public Guid EntrepreneurID { get; set; }
+        public Guid PK_EntrepreneurID { get; set; }
+        public Guid FK_CompanyID { get; set; }
+        public Guid FK_UserID { get; set; }
     }
 }
