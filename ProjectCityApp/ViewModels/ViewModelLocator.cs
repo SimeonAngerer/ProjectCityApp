@@ -21,6 +21,7 @@ namespace ProjectCityApp.ViewModels
             SimpleIoc.Default.Register<SettingsViewModel>(true);
             SimpleIoc.Default.Register<StartViewModel>(true);
             SimpleIoc.Default.Register<UserViewModel>(true);
+            SimpleIoc.Default.Register<CompaniesViewModel>(true);
         }
 
         public CategoriesViewModel Categories
@@ -84,6 +85,14 @@ namespace ProjectCityApp.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<UserViewModel>();
+            }
+        }
+
+        public CompaniesViewModel Companies
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CompaniesViewModel>();
             }
         }
 
