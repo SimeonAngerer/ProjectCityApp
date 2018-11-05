@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using ProjectCityApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,15 @@ namespace ProjectCityApp.Views
         public CompaniesPage()
         {
             this.InitializeComponent();
+            this.DataContext = SimpleIoc.Default.GetInstance<CompaniesViewModel>();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            var categoryId = ((Guid)e.Parameter);
+            var vm = SimpleIoc.Default.GetInstance<CompaniesViewModel>();
+            vm.GetCompanies(categoryId);
         }
     }
 }

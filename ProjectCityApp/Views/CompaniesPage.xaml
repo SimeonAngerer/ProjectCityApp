@@ -13,7 +13,6 @@
         <GridView.ItemTemplate>
             <DataTemplate>
                 <StackPanel Orientation="Vertical">
-                    
                     <Image Height="200" Width="300" Source="{Binding Image}" Margin="2" />
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />
                 </StackPanel>
