@@ -18,7 +18,7 @@
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="{Binding Test}">
+                             RelativePanel.AlignTopWithPanel="True" Text="Categories">
         </controls:PageHeader>
 
         <GridView ItemsSource="{Binding Categories}" Margin="5" RelativePanel.Below="pageHeader" x:Name="gridView">
