@@ -5,57 +5,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
+using ProjectCityAppUWP.Models;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ProjectCityAppUWP.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        public ObservableCollection<SharedCompany> Companies { get; set; }
+
         public MainPageViewModel()
         {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                Value = "Designtime value";
-            }
         }
 
-        string _Value = "Gas";
-        public string Value { get { return _Value; } set { Set(ref _Value, value); } }
-
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            if (suspensionState.Any())
+            string currentUser = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"];
+            if (!String.IsNullOrEmpty(currentUser))
             {
-                Value = suspensionState[nameof(Value)]?.ToString();
+                GetCompanies(Guid.Parse(currentUser));
             }
-            await Task.CompletedTask;
+            return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
+        public async void GetCompanies(Guid userId)
         {
-            if (suspending)
+            if (Companies == null) { Companies = new ObservableCollection<SharedCompany>(); }
+            Companies.Clear();
+            HttpClient client = new HttpClient();
+            string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/company?userID=" + userId));
+            var list = JsonConvert.DeserializeObject<List<SharedCompany>>(res);
+            foreach (var item in list)
             {
-                suspensionState[nameof(Value)] = Value;
+                Companies.Add(item);
             }
-            await Task.CompletedTask;
+            RaisePropertyChanged("Companies");
         }
-
-        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
-        {
-            args.Cancel = false;
-            await Task.CompletedTask;
-        }
-
-        public void GotoDetailsPage() =>
-            NavigationService.Navigate(typeof(Views.DetailPage), Value);
-
-        public void GotoSettings() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 0);
-
-        public void GotoPrivacy() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 1);
-
-        public void GotoAbout() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 2);
-
     }
 }
