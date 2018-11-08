@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Template10.Mvvm;
 
 namespace ProjectCityAppUWP.Models
 {
@@ -16,5 +17,6 @@ namespace ProjectCityAppUWP.Models
         public string City { get; set; }
         public string Facebook { get; set; }
         public Guid FK_CategoryID { get; set; }
+        public DelegateCommand<Guid> Command { get; set; }
     }
 }

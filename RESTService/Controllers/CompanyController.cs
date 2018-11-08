@@ -29,6 +29,21 @@ namespace RESTService.Controllers
             }).ToList();
         }
 
+        public SharedCompany Get(Guid id)
+        {
+            var tempValue = model.Companies.SingleOrDefault(x => x.PK_CompanyID == id);
+            return new SharedCompany()
+            {
+                City = tempValue.City,
+                Facebook = tempValue.Facebook,
+                FK_CategoryID = tempValue.FK_CategoryID,
+                Image = tempValue.Image,
+                Name = tempValue.Name,
+                PK_CompanyID = tempValue.PK_CompanyID,
+                Street = tempValue.Street,
+                ZipCode = tempValue.Zipcode
+            };
+        }
         public void Post([FromBody]SharedCompany value)
         {
             model.Companies.Add(new Company()

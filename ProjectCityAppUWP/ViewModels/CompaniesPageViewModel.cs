@@ -31,9 +31,15 @@ namespace ProjectCityAppUWP.ViewModels
             var list = JsonConvert.DeserializeObject<List<SharedCompany>>(res);
             foreach (var item in list)
             {
+                item.Command = new DelegateCommand<Guid>(GoToCompanyDetail);     // Workaround!!!
                 Companies.Add(item);
             }
             RaisePropertyChanged("Companies");
+        }
+
+        private void GoToCompanyDetail(Guid guid)
+        {
+            NavigationService.Navigate(typeof(Views.CompanyDetailPage), guid);
         }
     }
 }

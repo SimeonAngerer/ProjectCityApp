@@ -23,7 +23,7 @@
         <GridView ItemsSource="{Binding Companies}" Margin="5" RelativePanel.Below="pageHeader" x:Name="gridView">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Button Background="White" Command="{Binding Command}" CommandParameter="{Binding PK_CategoryID}" >
+                    <Button Background="White" Command="{Binding Command}" CommandParameter="{Binding PK_CompanyID}" >
                         <StackPanel Orientation="Vertical">
                             <Image Height="200" Width="300" Source="{Binding Image}" Margin="2" />
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />
