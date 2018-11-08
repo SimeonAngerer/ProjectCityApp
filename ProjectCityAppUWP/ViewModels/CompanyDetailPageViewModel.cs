@@ -14,6 +14,24 @@ namespace ProjectCityAppUWP.ViewModels
     public class CompanyDetailPageViewModel : ViewModelBase
     {
         public SharedCompany Company { get; set; }
+        public DelegateCommand BtnFacebook { get; set; }
+        public DelegateCommand BtnLike { get; set; }
+
+        public CompanyDetailPageViewModel()
+        {
+            BtnFacebook = new DelegateCommand(OpenFacebook);
+            BtnLike = new DelegateCommand(LikeCompany);
+        }
+
+        private void LikeCompany()
+        {
+            //LaunchUriAsync(new Uri(Company.Facebook);
+        }
+
+        private void OpenFacebook()
+        {
+            throw new NotImplementedException();
+        }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {

@@ -19,5 +19,35 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" Text="{Binding Company.Name}">
         </controls:PageHeader>
+
+        <Grid RelativePanel.Below="pageHeader" x:Name="grid" Margin="5" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="Charlatan" FontSize="72" Margin="5"/>
+            <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Source="https://dummyimage.com/150x100/000000/fff.jpg" Margin="5" />
+            <TextBlock Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" FontSize="72" Margin="5" HorizontalAlignment="Left" HorizontalTextAlignment="Left" >
+                <Run Text="Vlasmarkt 6" />
+                <LineBreak />
+                <Run Text="9000" />
+                <Run Text="Gent" />
+            </TextBlock>
+            <Button Content="Like" Grid.Row="3" Grid.Column="0" Command="{Binding BtnLike}" />
+            <Button Content="Facebook" Grid.Row="3" Grid.Column="1" Command="{Binding BtnFacebook}" />
+            <!-- Promotions -->
+            <!-- Events -->
+        </Grid>
     </RelativePanel>
 </Page>
