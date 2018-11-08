@@ -28,9 +28,9 @@ namespace ProjectCityAppUWP.ViewModels
             //LaunchUriAsync(new Uri(Company.Facebook);
         }
 
-        private void OpenFacebook()
+        private async void OpenFacebook()
         {
-            throw new NotImplementedException();
+            var success = await Windows.System.Launcher.LaunchUriAsync(new Uri(Company.Facebook));
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
