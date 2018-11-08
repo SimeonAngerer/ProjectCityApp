@@ -23,9 +23,16 @@ namespace ProjectCityAppUWP.ViewModels
             BtnLike = new DelegateCommand(LikeCompany);
         }
 
-        private void LikeCompany()
+        private async void LikeCompany()
         {
-            //LaunchUriAsync(new Uri(Company.Facebook);
+            string currentUser = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"];
+            if (!String.IsNullOrEmpty(currentUser))
+            {
+                HttpClient client = new HttpClient();
+                var res = await client.PostAsync(
+                    new Uri($"http://localhost:51070/api/Follower?companyGuid={Company.PK_CompanyID}&userId={currentUser}"),
+                    null);
+            }
         }
 
         private async void OpenFacebook()

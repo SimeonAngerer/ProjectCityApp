@@ -12,7 +12,7 @@ namespace RESTService.Controllers
     {
         CityAppEntities model = new CityAppEntities();
 
-        #region GUID
+        #region CRUD
 
         public IEnumerable<SharedFollower> Get()
         {
@@ -46,5 +46,16 @@ namespace RESTService.Controllers
         }
 
         #endregion
+
+        public void Follow(Guid companyGuid, Guid userId)
+        {
+            model.Followers.Add(new Follower()
+            {
+                FK_CompanyID = companyGuid,
+                FK_CustomerID = model.Customers.Single(x => x.FK_UserID == userId).PK_CustomerID,
+                PK_FollowerID = Guid.NewGuid()
+            });
+            model.SaveChanges();
+        }
     }
 }
