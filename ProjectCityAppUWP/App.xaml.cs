@@ -9,6 +9,7 @@ using System.Linq;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using ProjectCityAppUWP.Models;
+using ProjectCityAppUWP.ViewModels;
 
 namespace ProjectCityAppUWP
 {
@@ -22,7 +23,6 @@ namespace ProjectCityAppUWP
         {
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"] = "8D6ACF3D-4704-4792-8EF5-430E78430C95";
             #region app settings
 
             // some settings must be set in app.constructor
@@ -32,6 +32,8 @@ namespace ProjectCityAppUWP
             ShowShellBackButton = settings.UseShellBackButton;
 
             #endregion
+
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Clear();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

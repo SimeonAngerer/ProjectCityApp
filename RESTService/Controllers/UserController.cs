@@ -27,6 +27,19 @@ namespace RESTService.Controllers
             });
         }
 
+        public SharedUser Get(Guid id)
+        {
+            var tempValue = model.Users.SingleOrDefault(x => x.PK_UserID == id);
+            return new SharedUser()
+            {
+                DateOfBirth = tempValue.DateOfBirth,
+                FirstName = tempValue.FirstName,
+                LastName = tempValue.LastName,
+                PK_UserID = tempValue.PK_UserID,
+                UserName = tempValue.UserName
+            };
+        }
+
         public void Post([FromBody]SharedUser value)
         {
             model.Users.Add(new User()
@@ -114,9 +127,9 @@ namespace RESTService.Controllers
             }
         }
 
-        public IEnumerable<SharedUser> GetFollowerByCompanyId(Guid id)
+        public IEnumerable<SharedUser> GetFollowerByCompanyId(Guid companyId)
         {
-            return model.Followers.Where(x => x.FK_CompanyID == id).Select(x => new SharedUser()
+            return model.Followers.Where(x => x.FK_CompanyID == companyId).Select(x => new SharedUser()
             {
                 DateOfBirth = x.Customer.User.DateOfBirth,
                 FirstName = x.Customer.User.FirstName,

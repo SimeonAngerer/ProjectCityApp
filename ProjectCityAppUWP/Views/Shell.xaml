@@ -54,7 +54,7 @@
 
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  profile button  -->
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserAdministrationPage" Visibility="Visible">
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserAdministrationPage" Visibility="{x:Bind ViewModel.IsLoggedIn,Mode=OneWay}">
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48"
                                 Height="48"
@@ -64,7 +64,7 @@
                                Text="{x:Bind ViewModel.CurrentUser,Mode=OneWay}" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserMainPage" Visibility="{x:Bind ViewModel.IsLoggedIn,Mode=OneWay}">
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserSignIn" Visibility="Visible" >
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48"
                                 Height="48"
