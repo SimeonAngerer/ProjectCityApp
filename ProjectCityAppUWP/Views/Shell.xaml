@@ -9,8 +9,12 @@
       xmlns:local="using:ProjectCityAppUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:ProjectCityAppUWP.Views"
+      xmlns:vm="using:ProjectCityAppUWP.ViewModels"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:ShellViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
 
@@ -50,24 +54,24 @@
 
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  profile button  -->
-            <Controls:HamburgerButtonInfo ButtonType="Command">
-                <Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="Tapped">
-                        <behaviors:MessageDialogAction Title="Show profile" Content="This is an example of a Command-type hamburger button. It does not navigate, only raises the Tapped event for some custom implementation." />
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserAdministrationPage" Visibility="Visible">
                 <StackPanel Orientation="Horizontal">
-                    <ToolTipService.ToolTip>
-                        <TextBlock MaxWidth="225"
-                                   Text="This is the tooltip for the Show Profile command button. Remember to localize."
-                                   TextWrapping="Wrap" />
-                    </ToolTipService.ToolTip>
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Contact" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="User profile" />
+                               Text="{x:Bind ViewModel.CurrentUser,Mode=OneWay}" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserMainPage" Visibility="{x:Bind ViewModel.IsLoggedIn,Mode=OneWay}">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="People" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="User Profile" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             <!--  settingspage button  -->
