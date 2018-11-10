@@ -43,13 +43,17 @@ namespace ProjectCityAppUWP.ViewModels
             while(true)
             {
                 await Task.Delay(1000);
-                if (Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"] != null)
+                if (Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"] != null && IsLoggedIn != Visibility.Visible)
                 {
                     var tempUserId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"];
                     HttpClient client = new HttpClient();
                     string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/User/" + tempUserId));
                     var user = JsonConvert.DeserializeObject<SharedUser>(res);
                     UpdateView(user.FirstName + " " + user.LastName);
+                }
+                else if (Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"] == null && IsLoggedIn == Visibility.Visible)
+                {
+                    UpdateView(null);
                 }
             }
         }

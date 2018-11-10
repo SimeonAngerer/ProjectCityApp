@@ -21,10 +21,21 @@
                              RelativePanel.AlignTopWithPanel="True" Text="Login">
         </controls:PageHeader>
 
-        <TextBlock Text="Username:" RelativePanel.Below="pageHeader" x:Name="userTextBlock" Width="200" Margin="5" />
-        <TextBox Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" RelativePanel.RightOf="userTextBlock" RelativePanel.Below="pageHeader" x:Name="userTextBox" Width="200" Margin="5" />
-        <TextBlock Text="Password:" RelativePanel.Below="userTextBlock" x:Name="passTextBlock" Width="200" Margin="5" />
-        <TextBox Text="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" RelativePanel.RightOf="passTextBlock" RelativePanel.Below="userTextBox" x:Name="passTextBox" Width="200" Margin="5" />
-        <Button Command="{Binding BtnLogin}" Content="Login" RelativePanel.Below="passTextBlock" x:Name="loginButton" Width="200" Margin="5" />
+        <Grid RelativePanel.Below="pageHeader">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Username:" Width="200" Margin="5" />
+            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Password:" Width="200" Margin="5" />
+            <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
+            <Button Grid.Row="2" Grid.Column="0" Command="{Binding BtnLogin}" Content="Login" Width="200" Margin="5" />
+        </Grid>
     </RelativePanel>
 </Page>

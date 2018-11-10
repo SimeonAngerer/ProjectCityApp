@@ -6,8 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
+    xmlns:viewmodels="using:ProjectCityAppUWP.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <viewmodels:UserAdministrationPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,5 +20,6 @@
                              RelativePanel.AlignTopWithPanel="True" Text="User Administration">
         </controls:PageHeader>
 
+        <Button Content="Logout" RelativePanel.Below="pageHeader" Command="{Binding BtnLogout}" Margin="5" />
     </RelativePanel>
 </Page>

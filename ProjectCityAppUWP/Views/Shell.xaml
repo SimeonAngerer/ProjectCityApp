@@ -10,11 +10,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:views="using:ProjectCityAppUWP.Views"
       xmlns:vm="using:ProjectCityAppUWP.ViewModels"
+      xmlns:converters="using:ProjectCityAppUWP.Converters"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:ShellViewModel x:Name="ViewModel" />
     </Page.DataContext>
+    <Page.Resources>
+        <converters:InverseVisibilityConverter x:Name="inverseVisibilityConverter" />
+    </Page.Resources>
 
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
 
@@ -64,7 +68,7 @@
                                Text="{x:Bind ViewModel.CurrentUser,Mode=OneWay}" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserSignIn" Visibility="Visible" >
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:UserSignIn" Visibility="{x:Bind Path=ViewModel.IsLoggedIn,Mode=OneWay,Converter={StaticResource inverseVisibilityConverter}}" >
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48"
                                 Height="48"
