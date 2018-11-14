@@ -27,9 +27,7 @@ namespace RESTService
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Discount> Discounts { get; set; }
-        public virtual DbSet<Entrepreneur> Entrepreneurs { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Follower> Followers { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }

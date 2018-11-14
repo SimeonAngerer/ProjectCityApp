@@ -16,6 +16,7 @@ namespace RESTService
     {
         public System.Guid PK_PromotionID { get; set; }
         public string Title { get; set; }
+        public string Image { get; set; }
         public string Description { get; set; }
         public System.DateTime Start { get; set; }
         public System.DateTime Expiration { get; set; }

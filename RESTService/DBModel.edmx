@@ -23,15 +23,8 @@
           <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Facebook" Type="varchar" MaxLength="50" />
+          <Property Name="Facebook" Type="varchar(max)" />
           <Property Name="FK_CategoryID" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="PK_CustomerID" />
-          </Key>
-          <Property Name="PK_CustomerID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_UserID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Discount">
           <Key>
@@ -42,20 +35,13 @@
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Entrepreneur">
-          <Key>
-            <PropertyRef Name="PK_EntrepreneurID" />
-          </Key>
-          <Property Name="PK_EntrepreneurID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_UserID" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="PK_EventID" />
           </Key>
           <Property Name="PK_EventID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" />
           <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
@@ -68,7 +54,7 @@
           </Key>
           <Property Name="PK_FollowerID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_UserID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -76,6 +62,7 @@
           </Key>
           <Property Name="PK_PromotionID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Start" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
@@ -92,6 +79,8 @@
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="FK_CompanyID" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_Company_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -102,42 +91,6 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="FK_CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="PK_UserID" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="FK_UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entrepreneur_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="PK_CompanyID" />
-            </Principal>
-            <Dependent Role="Entrepreneur">
-              <PropertyRef Name="FK_CompanyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entrepreneur_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="PK_UserID" />
-            </Principal>
-            <Dependent Role="Entrepreneur">
-              <PropertyRef Name="FK_UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -165,15 +118,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Follower_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+        <Association Name="FK_Follower_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="PK_CustomerID" />
+            <Principal Role="User">
+              <PropertyRef Name="PK_UserID" />
             </Principal>
             <Dependent Role="Follower">
-              <PropertyRef Name="FK_CustomerID" />
+              <PropertyRef Name="FK_UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -201,12 +154,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="FK_CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CityAppModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Entrepreneur" EntityType="Self.Entrepreneur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Follower" EntityType="Self.Follower" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
@@ -214,18 +177,6 @@
           <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Company" EntitySet="Company" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entrepreneur_Company" Association="Self.FK_Entrepreneur_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="Entrepreneur" EntitySet="Entrepreneur" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entrepreneur_User" Association="Self.FK_Entrepreneur_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Entrepreneur" EntitySet="Entrepreneur" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Company" Association="Self.FK_Event_Company">
             <End Role="Company" EntitySet="Company" />
@@ -235,8 +186,8 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Follower" EntitySet="Follower" />
           </AssociationSet>
-          <AssociationSet Name="FK_Follower_Customer" Association="Self.FK_Follower_Customer">
-            <End Role="Customer" EntitySet="Customer" />
+          <AssociationSet Name="FK_Follower_User" Association="Self.FK_Follower_User">
+            <End Role="User" EntitySet="User" />
             <End Role="Follower" EntitySet="Follower" />
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Company" Association="Self.FK_Promotion_Company">
@@ -246,6 +197,10 @@
           <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
             <End Role="Discount" EntitySet="Discount" />
             <End Role="Promotion" EntitySet="Promotion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -272,22 +227,13 @@
           <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_CategoryID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Company_Category" FromRole="Company" ToRole="Category" />
-          <NavigationProperty Name="Entrepreneurs" Relationship="Self.FK_Entrepreneur_Company" FromRole="Company" ToRole="Entrepreneur" />
           <NavigationProperty Name="Events" Relationship="Self.FK_Event_Company" FromRole="Company" ToRole="Event" />
           <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_Company" FromRole="Company" ToRole="Follower" />
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Company" FromRole="Company" ToRole="Promotion" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="PK_CustomerID" />
-          </Key>
-          <Property Name="PK_CustomerID" Type="Guid" Nullable="false" />
-          <Property Name="FK_UserID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
-          <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_Customer" FromRole="Customer" ToRole="Follower" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
         </EntityType>
         <EntityType Name="Discount">
           <Key>
@@ -299,22 +245,13 @@
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Discount" FromRole="Discount" ToRole="Promotion" />
         </EntityType>
-        <EntityType Name="Entrepreneur">
-          <Key>
-            <PropertyRef Name="PK_EntrepreneurID" />
-          </Key>
-          <Property Name="PK_EntrepreneurID" Type="Guid" Nullable="false" />
-          <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="FK_UserID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Entrepreneur_Company" FromRole="Entrepreneur" ToRole="Company" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Entrepreneur_User" FromRole="Entrepreneur" ToRole="User" />
-        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="PK_EventID" />
           </Key>
           <Property Name="PK_EventID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -328,9 +265,9 @@
           </Key>
           <Property Name="PK_FollowerID" Type="Guid" Nullable="false" />
           <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="FK_CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="FK_UserID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Follower_Company" FromRole="Follower" ToRole="Company" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Follower_Customer" FromRole="Follower" ToRole="Customer" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Follower_User" FromRole="Follower" ToRole="User" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -338,6 +275,7 @@
           </Key>
           <Property Name="PK_PromotionID" Type="Guid" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
@@ -356,8 +294,10 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
-          <NavigationProperty Name="Entrepreneurs" Relationship="Self.FK_Entrepreneur_User" FromRole="User" ToRole="Entrepreneur" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CompanyID" Type="Guid" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_User_Company" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_User" FromRole="User" ToRole="Follower" />
         </EntityType>
         <Association Name="FK_Company_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -368,18 +308,6 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="FK_CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entrepreneur_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="PK_CompanyID" />
-            </Principal>
-            <Dependent Role="Entrepreneur">
-              <PropertyRef Name="FK_CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -419,27 +347,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+        <Association Name="FK_User_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="PK_UserID" />
+            <Principal Role="Company">
+              <PropertyRef Name="PK_CompanyID" />
             </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="FK_UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Follower_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="PK_CustomerID" />
-            </Principal>
-            <Dependent Role="Follower">
-              <PropertyRef Name="FK_CustomerID" />
+            <Dependent Role="User">
+              <PropertyRef Name="FK_CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,14 +371,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Entrepreneur_User">
+        <Association Name="FK_Follower_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Entrepreneur" Type="Self.Entrepreneur" Multiplicity="*" />
+          <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="PK_UserID" />
             </Principal>
-            <Dependent Role="Entrepreneur">
+            <Dependent Role="Follower">
               <PropertyRef Name="FK_UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -470,9 +386,7 @@
         <EntityContainer Name="CityAppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Discounts" EntityType="Self.Discount" />
-          <EntitySet Name="Entrepreneurs" EntityType="Self.Entrepreneur" />
           <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
@@ -480,10 +394,6 @@
           <AssociationSet Name="FK_Company_Category" Association="Self.FK_Company_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entrepreneur_Company" Association="Self.FK_Entrepreneur_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Entrepreneur" EntitySet="Entrepreneurs" />
           </AssociationSet>
           <AssociationSet Name="FK_Event_Company" Association="Self.FK_Event_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -497,21 +407,17 @@
             <End Role="Company" EntitySet="Companies" />
             <End Role="Promotion" EntitySet="Promotions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+          <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
+            <End Role="Company" EntitySet="Companies" />
             <End Role="User" EntitySet="Users" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Follower_Customer" Association="Self.FK_Follower_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Follower" EntitySet="Followers" />
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
             <End Role="Discount" EntitySet="Discounts" />
             <End Role="Promotion" EntitySet="Promotions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Entrepreneur_User" Association="Self.FK_Entrepreneur_User">
+          <AssociationSet Name="FK_Follower_User" Association="Self.FK_Follower_User">
             <End Role="User" EntitySet="Users" />
-            <End Role="Entrepreneur" EntitySet="Entrepreneurs" />
+            <End Role="Follower" EntitySet="Followers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -543,14 +449,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="CityAppModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="PK_CustomerID" ColumnName="PK_CustomerID" />
-                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Discounts">
             <EntityTypeMapping TypeName="CityAppModel.Discount">
               <MappingFragment StoreEntitySet="Discount">
@@ -561,20 +459,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Entrepreneurs">
-            <EntityTypeMapping TypeName="CityAppModel.Entrepreneur">
-              <MappingFragment StoreEntitySet="Entrepreneur">
-                <ScalarProperty Name="PK_EntrepreneurID" ColumnName="PK_EntrepreneurID" />
-                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
-                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="CityAppModel.Event">
               <MappingFragment StoreEntitySet="Event">
                 <ScalarProperty Name="PK_EventID" ColumnName="PK_EventID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
@@ -588,7 +478,7 @@
               <MappingFragment StoreEntitySet="Follower">
                 <ScalarProperty Name="PK_FollowerID" ColumnName="PK_FollowerID" />
                 <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
-                <ScalarProperty Name="FK_CustomerID" ColumnName="FK_CustomerID" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -597,6 +487,7 @@
               <MappingFragment StoreEntitySet="Promotion">
                 <ScalarProperty Name="PK_PromotionID" ColumnName="PK_PromotionID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="Expiration" ColumnName="Expiration" />
@@ -614,6 +505,8 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

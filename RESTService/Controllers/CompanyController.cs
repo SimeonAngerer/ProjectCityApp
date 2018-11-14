@@ -146,7 +146,7 @@ namespace RESTService.Controllers
 
         public IEnumerable<SharedCompany> GetFollowedCompaniesByUser(Guid userID)
         {
-            return model.Followers.Where(x => x.Customer.User.PK_UserID == userID).Select(x => new SharedCompany()
+            return model.Followers.Where(x => x.FK_UserID == userID).Select(x => new SharedCompany()
             {
                 City = x.Company.City,
                 PK_CompanyID = x.Company.PK_CompanyID,
