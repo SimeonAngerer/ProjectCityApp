@@ -14,6 +14,5 @@ namespace SharedClasses
         public DateTime Start { get; set; }
         public DateTime Expiration { get; set; }
         public Guid FK_CompanyID { get; set; }
-        public Guid FK_DiscountID { get; set; }
     }
 }

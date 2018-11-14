@@ -21,9 +21,7 @@ namespace RESTService
         public System.DateTime Start { get; set; }
         public System.DateTime Expiration { get; set; }
         public System.Guid FK_CompanyID { get; set; }
-        public System.Guid FK_DiscountID { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual Discount Discount { get; set; }
     }
 }

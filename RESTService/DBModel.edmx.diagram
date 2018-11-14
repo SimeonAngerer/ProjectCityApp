@@ -4,20 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2b54e0cb62a548b5822883d3e9f2c401" Name="Diagram1">
-        <EntityTypeShape EntityType="CityAppModel.Category" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.Company" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.Discount" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.Event" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.Follower" Width="1.5" PointX="7.5" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.Promotion" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityAppModel.User" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+      <Diagram DiagramId="1cb1d986d9e34272a8efed38020b500b" Name="Diagram1">
+        <EntityTypeShape EntityType="CityAppModel.Category" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAppModel.Company" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAppModel.Event" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAppModel.Follower" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAppModel.Promotion" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CityAppModel.User" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
         <AssociationConnector Association="CityAppModel.FK_Company_Category" ManuallyRouted="false" />
         <AssociationConnector Association="CityAppModel.FK_Event_Company" ManuallyRouted="false" />
         <AssociationConnector Association="CityAppModel.FK_Follower_Company" ManuallyRouted="false" />
         <AssociationConnector Association="CityAppModel.FK_Promotion_Company" ManuallyRouted="false" />
         <AssociationConnector Association="CityAppModel.FK_User_Company" ManuallyRouted="false" />
-        <AssociationConnector Association="CityAppModel.FK_Promotion_Discount" ManuallyRouted="false" />
         <AssociationConnector Association="CityAppModel.FK_Follower_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

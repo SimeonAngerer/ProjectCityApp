@@ -197,7 +197,6 @@
     </Compile>
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
-    <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FollowerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,9 +216,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Discount.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Event.cs">
       <DependentUpon>DBModel.tt</DependentUpon>

@@ -26,15 +26,6 @@
           <Property Name="Facebook" Type="varchar(max)" />
           <Property Name="FK_CategoryID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <EntityType Name="Discount">
-          <Key>
-            <PropertyRef Name="PK_DiscountID" />
-          </Key>
-          <Property Name="PK_DiscountID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar(max)" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="PK_EventID" />
@@ -67,7 +58,6 @@
           <Property Name="Start" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Expiration" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FK_DiscountID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -142,18 +132,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Promotion_Discount">
-          <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Discount">
-              <PropertyRef Name="PK_DiscountID" />
-            </Principal>
-            <Dependent Role="Promotion">
-              <PropertyRef Name="FK_DiscountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -169,7 +147,6 @@
         <EntityContainer Name="CityAppModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Follower" EntityType="Self.Follower" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
@@ -192,10 +169,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Company" Association="Self.FK_Promotion_Company">
             <End Role="Company" EntitySet="Company" />
-            <End Role="Promotion" EntitySet="Promotion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
-            <End Role="Discount" EntitySet="Discount" />
             <End Role="Promotion" EntitySet="Promotion" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
@@ -235,16 +208,6 @@
           <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Company" FromRole="Company" ToRole="Promotion" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Company" FromRole="Company" ToRole="User" />
         </EntityType>
-        <EntityType Name="Discount">
-          <Key>
-            <PropertyRef Name="PK_DiscountID" />
-          </Key>
-          <Property Name="PK_DiscountID" Type="Guid" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Promotions" Relationship="Self.FK_Promotion_Discount" FromRole="Discount" ToRole="Promotion" />
-        </EntityType>
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="PK_EventID" />
@@ -280,9 +243,7 @@
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="FK_DiscountID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Promotion_Company" FromRole="Promotion" ToRole="Company" />
-          <NavigationProperty Name="Discount" Relationship="Self.FK_Promotion_Discount" FromRole="Promotion" ToRole="Discount" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -359,18 +320,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Promotion_Discount">
-          <End Role="Discount" Type="Self.Discount" Multiplicity="1" />
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Discount">
-              <PropertyRef Name="PK_DiscountID" />
-            </Principal>
-            <Dependent Role="Promotion">
-              <PropertyRef Name="FK_DiscountID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Follower_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Follower" Type="Self.Follower" Multiplicity="*" />
@@ -386,7 +335,6 @@
         <EntityContainer Name="CityAppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="Discounts" EntityType="Self.Discount" />
           <EntitySet Name="Events" EntityType="Self.Event" />
           <EntitySet Name="Followers" EntityType="Self.Follower" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
@@ -410,10 +358,6 @@
           <AssociationSet Name="FK_User_Company" Association="Self.FK_User_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Promotion_Discount" Association="Self.FK_Promotion_Discount">
-            <End Role="Discount" EntitySet="Discounts" />
-            <End Role="Promotion" EntitySet="Promotions" />
           </AssociationSet>
           <AssociationSet Name="FK_Follower_User" Association="Self.FK_Follower_User">
             <End Role="User" EntitySet="Users" />
@@ -446,16 +390,6 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />
                 <ScalarProperty Name="FK_CategoryID" ColumnName="FK_CategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Discounts">
-            <EntityTypeMapping TypeName="CityAppModel.Discount">
-              <MappingFragment StoreEntitySet="Discount">
-                <ScalarProperty Name="PK_DiscountID" ColumnName="PK_DiscountID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -492,7 +426,6 @@
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="Expiration" ColumnName="Expiration" />
                 <ScalarProperty Name="FK_CompanyID" ColumnName="FK_CompanyID" />
-                <ScalarProperty Name="FK_DiscountID" ColumnName="FK_DiscountID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
