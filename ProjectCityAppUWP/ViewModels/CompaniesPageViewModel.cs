@@ -15,10 +15,12 @@ namespace ProjectCityAppUWP.ViewModels
     public class CompaniesPageViewModel : ViewModelBase
     {
         public ObservableCollection<SharedCompany> Companies { get; set; }
+        public DelegateCommand<Guid> CmdGoToCompanyDetail { get; set; }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             GetCompanies((Guid)parameter);
+            CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -31,7 +33,6 @@ namespace ProjectCityAppUWP.ViewModels
             var list = JsonConvert.DeserializeObject<List<SharedCompany>>(res);
             foreach (var item in list)
             {
-                item.Command = new DelegateCommand<Guid>(GoToCompanyDetail);     // Workaround!!!
                 Companies.Add(item);
             }
             RaisePropertyChanged("Companies");

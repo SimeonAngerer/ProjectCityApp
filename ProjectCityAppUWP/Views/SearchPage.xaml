@@ -8,11 +8,8 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:ProjectCityAppUWP.ViewModels"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Page.DataContext>
-        <vm:SearchPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Search, Mode=OneWay, Source={StaticResource Locator}}">
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
@@ -27,7 +24,7 @@
         <GridView ItemsSource="{Binding Companies}" Margin="5" RelativePanel.Below="searchControls" x:Name="gridView">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Button Background="White" Command="{Binding Command}" CommandParameter="{Binding PK_CompanyID}" >
+                    <Button Background="White" Command="{Binding Search.CmdGoToCompanyDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_CompanyID}" >
                         <StackPanel Orientation="Vertical">
                             <Image Height="200" Width="300" Source="{Binding Image}" Margin="2" />
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />

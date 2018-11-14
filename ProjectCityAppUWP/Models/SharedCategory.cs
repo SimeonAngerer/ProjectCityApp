@@ -12,6 +12,5 @@ namespace ProjectCityAppUWP.Models
         public Guid PK_CategoryID { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public DelegateCommand<Guid> Command { get; set; }
     }
 }

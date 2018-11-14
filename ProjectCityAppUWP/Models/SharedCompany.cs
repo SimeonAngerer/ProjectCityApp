@@ -17,6 +17,5 @@ namespace ProjectCityAppUWP.Models
         public string City { get; set; }
         public string Facebook { get; set; }
         public Guid FK_CategoryID { get; set; }
-        public DelegateCommand<Guid> Command { get; set; }
     }
 }
