@@ -97,46 +97,31 @@ namespace RESTService.Controllers
 
         public IEnumerable<SharedUser> GetByType(string type)
         {
-            if (type == "Entrepreneur")
+            return model.Users.Where(x => x.Type == type).Select(x => new SharedUser()
             {
-                return model.Users.Where(x => model.Entrepreneurs.Count(y => y.FK_UserID == x.PK_UserID) > 0).Select(x => new SharedUser()
-                {
-                    DateOfBirth = x.DateOfBirth,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Password = x.Password,
-                    PK_UserID = x.PK_UserID,
-                    UserName = x.UserName
-                });
-            }
-            else if (type == "Customer")
-            {
-                return model.Users.Where(x => model.Customers.Count(y => y.FK_UserID == x.PK_UserID) > 0).Select(x => new SharedUser()
-                {
-                    DateOfBirth = x.DateOfBirth,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Password = x.Password,
-                    PK_UserID = x.PK_UserID,
-                    UserName = x.UserName
-                });
-            }
-            else
-            {
-                return null;
-            }
+                DateOfBirth = x.DateOfBirth,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Password = x.Password,
+                PK_UserID = x.PK_UserID,
+                UserName = x.UserName,
+                Type = x.Type,
+                FK_CompanyID = x.FK_CompanyID.HasValue ? x.FK_CompanyID.Value : Guid.Empty
+            });
         }
 
         public IEnumerable<SharedUser> GetFollowerByCompanyId(Guid companyId)
         {
             return model.Followers.Where(x => x.FK_CompanyID == companyId).Select(x => new SharedUser()
             {
-                DateOfBirth = x.Customer.User.DateOfBirth,
-                FirstName = x.Customer.User.FirstName,
-                LastName = x.Customer.User.LastName,
+                DateOfBirth = x.User.DateOfBirth,
+                FirstName = x.User.FirstName,
+                LastName = x.User.LastName,
                 //Password = x.Customer.User.Password,
-                PK_UserID = x.Customer.User.PK_UserID,
-                UserName = x.Customer.User.UserName
+                PK_UserID = x.User.PK_UserID,
+                UserName = x.User.UserName,
+                FK_CompanyID = x.User.FK_CompanyID.HasValue ? x.User.FK_CompanyID.Value : Guid.Empty,
+                Type = x.User.Type
             });
         }
     }

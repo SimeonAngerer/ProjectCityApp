@@ -8,10 +8,8 @@
     xmlns:controls="using:Template10.Controls"
     xmlns:viewmodels="using:ProjectCityAppUWP.ViewModels"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.DataContext>
-        <viewmodels:UserAdministrationPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding UserAdministration, Mode=OneWay, Source={StaticResource Locator}}">
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

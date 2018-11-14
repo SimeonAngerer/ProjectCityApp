@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ProjectCityAppUWP.Models;
+using SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,12 +15,12 @@ namespace ProjectCityAppUWP.ViewModels
     public class CategoriesPageViewModel : ViewModelBase
     {
         public ObservableCollection<SharedCategory> Categories { get; set; }
-        //public ICommand CmdGoToCategory { get; set; }
+        public DelegateCommand<Guid> CmdGoToCategory { get; set; }
 
         public CategoriesPageViewModel()
         {
             Categories = new ObservableCollection<SharedCategory>();
-            //CmdGoToCategory = new DelegateCommand(GoToCategory);
+            CmdGoToCategory = new DelegateCommand<Guid>(GoToCategory);
             GetCategories();
         }
 
@@ -32,7 +32,6 @@ namespace ProjectCityAppUWP.ViewModels
             var tempList = JsonConvert.DeserializeObject<List<SharedCategory>>(res);
             foreach(var item in tempList)
             {
-                item.Command = new DelegateCommand<Guid>(GoToCategory);     // Workaround!!!
                 Categories.Add(item);
             }
             RaisePropertyChanged("Categories");

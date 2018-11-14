@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ProjectCityAppUWP.Helpers;
-using ProjectCityAppUWP.Models;
+using SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

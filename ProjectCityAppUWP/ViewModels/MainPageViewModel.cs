@@ -5,16 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
-using ProjectCityAppUWP.Models;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using Newtonsoft.Json;
+using SharedClasses;
 
 namespace ProjectCityAppUWP.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         public ObservableCollection<SharedCompany> Companies { get; set; }
+        public DelegateCommand<Guid> CmdGoToCompanyDetail { get; set; }
 
         public MainPageViewModel()
         {
@@ -27,6 +28,7 @@ namespace ProjectCityAppUWP.ViewModels
             {
                 GetCompanies(Guid.Parse(currentUser));
             }
+            CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -39,7 +41,6 @@ namespace ProjectCityAppUWP.ViewModels
             var list = JsonConvert.DeserializeObject<List<SharedCompany>>(res);
             foreach (var item in list)
             {
-                item.Command = new DelegateCommand<Guid>(GoToCompanyDetail);     // Workaround!!!
                 Companies.Add(item);
             }
             RaisePropertyChanged("Companies");

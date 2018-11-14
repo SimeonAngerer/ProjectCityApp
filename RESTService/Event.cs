@@ -16,6 +16,7 @@ namespace RESTService
     {
         public System.Guid PK_EventID { get; set; }
         public string Name { get; set; }
+        public string Image { get; set; }
         public System.DateTime Date { get; set; }
         public string Street { get; set; }
         public string Zipcode { get; set; }

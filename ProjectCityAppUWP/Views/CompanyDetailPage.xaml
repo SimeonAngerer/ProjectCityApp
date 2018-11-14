@@ -8,12 +8,9 @@
     xmlns:vm="using:ProjectCityAppUWP.ViewModels"
     xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-    <Page.DataContext>
-        <vm:CompanyDetailPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
-    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding CompanyDetail, Mode=OneWay, Source={StaticResource Locator}}">
+
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"

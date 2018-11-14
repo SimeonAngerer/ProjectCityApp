@@ -16,9 +16,9 @@ namespace RESTService
     {
         public System.Guid PK_FollowerID { get; set; }
         public System.Guid FK_CompanyID { get; set; }
-        public System.Guid FK_CustomerID { get; set; }
+        public System.Guid FK_UserID { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -97,15 +97,6 @@
     </Compile>
     <Compile Include="Converters\InverseVisibilityConverter.cs" />
     <Compile Include="Helpers\HashMethods.cs" />
-    <Compile Include="Models\SharedCategory.cs" />
-    <Compile Include="Models\SharedCompany.cs" />
-    <Compile Include="Models\SharedCustomer.cs" />
-    <Compile Include="Models\SharedDiscount.cs" />
-    <Compile Include="Models\SharedEntrepreneur.cs" />
-    <Compile Include="Models\SharedEvent.cs" />
-    <Compile Include="Models\SharedFollower.cs" />
-    <Compile Include="Models\SharedPromotion.cs" />
-    <Compile Include="Models\SharedUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
@@ -116,7 +107,10 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserAdministrationPageViewModel.cs" />
+    <Compile Include="ViewModels\UserMainPageViewModel.cs" />
     <Compile Include="ViewModels\UserSignInPageViewModel.cs" />
+    <Compile Include="ViewModels\UserSignUpPageViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
@@ -239,19 +233,27 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.2.3</Version>
+      <Version>6.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLight">
+      <Version>5.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="Template10">
       <Version>1.1.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>1.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
+      <Version>2.0.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SharedClasses\SharedClasses.csproj">
+      <Project>{f58b4ae0-5fca-4ce8-a468-86ee4ae0bb29}</Project>
+      <Name>SharedClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

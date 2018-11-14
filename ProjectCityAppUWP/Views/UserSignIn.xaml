@@ -8,12 +8,9 @@
     xmlns:controls="using:Template10.Controls"
     mc:Ignorable="d"
     xmlns:vm="using:ProjectCityAppUWP.ViewModels"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding UserSignIn, Mode=OneWay, Source={StaticResource Locator}}">
 
-    <Page.DataContext>
-        <vm:UserSignInPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
-    
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"

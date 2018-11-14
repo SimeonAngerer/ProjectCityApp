@@ -19,7 +19,7 @@ namespace RESTService.Controllers
             return model.Followers.Select(x => new SharedFollower()
             {
                 FK_CompanyID = x.FK_CompanyID,
-                FK_CustomerID = x.FK_CustomerID,
+                FK_UserID = x.FK_UserID,
                 PK_FollowerID = x.PK_FollowerID
             });
         }
@@ -29,7 +29,7 @@ namespace RESTService.Controllers
             model.Followers.Add(new Follower()
             {
                 FK_CompanyID = value.FK_CompanyID,
-                FK_CustomerID = value.FK_CustomerID,
+                FK_UserID = value.FK_UserID,
                 PK_FollowerID = value.PK_FollowerID
             });
             model.SaveChanges();
@@ -52,7 +52,7 @@ namespace RESTService.Controllers
             model.Followers.Add(new Follower()
             {
                 FK_CompanyID = companyGuid,
-                FK_CustomerID = model.Customers.Single(x => x.FK_UserID == userId).PK_CustomerID,
+                FK_UserID = userId,
                 PK_FollowerID = Guid.NewGuid()
             });
             model.SaveChanges();
