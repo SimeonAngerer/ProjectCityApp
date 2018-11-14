@@ -2,6 +2,7 @@
 using ProjectCityAppUWP.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,7 +18,11 @@ namespace ProjectCityAppUWP.ViewModels
         public DelegateCommand BtnFacebook { get; set; }
         public DelegateCommand BtnLike { get; set; }
 
-        public CompanyDetailPageViewModel()
+		public ObservableCollection<SharedEvent> Events { get; set; }
+		public ObservableCollection<SharedEvent> Promotions { get; set; }
+
+
+		public CompanyDetailPageViewModel()
         {
             BtnFacebook = new DelegateCommand(OpenFacebook);
             BtnLike = new DelegateCommand(LikeCompany);
@@ -43,8 +48,10 @@ namespace ProjectCityAppUWP.ViewModels
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             GetCompany((Guid)parameter);
+			GetEvents((Guid)parameter);
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
+
         public async void GetCompany(Guid companyId)
         {
             HttpClient client = new HttpClient();
@@ -53,5 +60,22 @@ namespace ProjectCityAppUWP.ViewModels
             Company = tempCompany;
             RaisePropertyChanged("Company");
         }
-    }
+
+		public async void GetEvents(Guid companyId)
+		{
+			if (Events == null) { Events = new ObservableCollection<SharedEvent>(); }
+			Events.Clear();
+			HttpClient client = new HttpClient();
+			string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Event?companyID=" + companyId));
+			var list = JsonConvert.DeserializeObject<List<SharedEvent>>(res);
+			foreach (var item in list)
+			{
+				// Navigate to eventpage
+				// item.Command = new DelegateCommand<Guid>(GoToCompanyDetail);     // Workaround!!!
+				Events.Add(item);
+			}
+			RaisePropertyChanged("Events");
+		}
+
+	}
 }

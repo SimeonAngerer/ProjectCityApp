@@ -30,11 +30,58 @@
                 <Run Text="{Binding Company.City}" />
             </TextBlock>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" RelativePanel.Below="mainInfo">
+		<StackPanel Orientation="Horizontal" RelativePanel.Below="mainInfo" x:Name="buttons">
             <Button Content="Like" Command="{Binding BtnLike}" Margin="5,5,5,5" />
             <Button Content="Facebook" Command="{Binding BtnFacebook}" Margin="5,5,5,5" />
         </StackPanel>
-        <!-- Promotions -->
-        <!-- Events -->
-    </RelativePanel>
+
+
+		<StackPanel Orientation="Horizontal" x:Name="EventsAndPromotionsPanel" RelativePanel.Below="buttons">
+			<!-- Events -->
+			<StackPanel Orientation="Vertical">
+				<TextBlock Text="Events" FontSize="36" Margin="5"/>
+				<ListView ItemsSource="{Binding Events}" >
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
+								<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+									<Ellipse.Fill>
+										<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+									</Ellipse.Fill>
+								</Ellipse>
+								<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+									<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+									<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+									<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+								</StackPanel>
+							</StackPanel>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</StackPanel>
+			<!-- Promotions -->
+			<StackPanel Orientation="Vertical">
+				<TextBlock Text="Promotions" FontSize="36" Margin="5"/>
+				<ListView ItemsSource="{Binding Events}" >
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
+								<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+									<Ellipse.Fill>
+										<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+									</Ellipse.Fill>
+								</Ellipse>
+								<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+									<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+									<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+									<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+								</StackPanel>
+							</StackPanel>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</StackPanel>
+			
+		</StackPanel>
+	</RelativePanel>
 </Page>
