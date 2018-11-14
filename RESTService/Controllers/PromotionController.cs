@@ -75,9 +75,9 @@ namespace RESTService.Controllers
 
         #endregion
 
-        public IEnumerable<SharedPromotion> GetPromotionByCompanyID(Guid id)
+        public IEnumerable<SharedPromotion> GetPromotionByCompanyID(Guid companyID)
         {
-            return model.Promotions.Where(x => x.FK_CompanyID == id).Select(x => new SharedPromotion()
+            return model.Promotions.Where(x => x.FK_CompanyID == companyID).Select(x => new SharedPromotion()
             {
                 Description = x.Description,
                 Expiration = x.Expiration,
