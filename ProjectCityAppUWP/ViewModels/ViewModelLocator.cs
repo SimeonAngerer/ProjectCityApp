@@ -20,7 +20,11 @@ namespace ProjectCityAppUWP.ViewModels
             SimpleIoc.Default.Register<CategoriesPageViewModel>();
             SimpleIoc.Default.Register<CompaniesPageViewModel>();
             SimpleIoc.Default.Register<CompanyDetailPageViewModel>();
+            SimpleIoc.Default.Register<EventAdministrationPageViewModel>();
+            SimpleIoc.Default.Register<EventDetailPageViewModel>();
             SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<PromotionAdministrationPageViewModel>();
+            SimpleIoc.Default.Register<PromotionDetailPageViewModel>();
             SimpleIoc.Default.Register<SearchPageViewModel>();
             SimpleIoc.Default.Register<SettingsPageViewModel>();
             SimpleIoc.Default.Register<ShellViewModel>();
@@ -51,11 +55,39 @@ namespace ProjectCityAppUWP.ViewModels
                 return ServiceLocator.Current.GetInstance<CompanyDetailPageViewModel>();
             }
         }
+        public EventAdministrationPageViewModel EventAdministration
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EventAdministrationPageViewModel>();
+            }
+        }
+        public EventDetailPageViewModel EventDetail
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EventDetailPageViewModel>();
+            }
+        }
         public MainPageViewModel Main
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<MainPageViewModel>();
+            }
+        }
+        public PromotionAdministrationPageViewModel PromotionAdministration
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PromotionAdministrationPageViewModel>();
+            }
+        }
+        public PromotionDetailPageViewModel PromotionDetail
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PromotionDetailPageViewModel>();
             }
         }
         public SearchPageViewModel Search

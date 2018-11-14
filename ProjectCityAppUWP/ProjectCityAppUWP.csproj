@@ -102,7 +102,11 @@
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\CompaniesPageViewModel.cs" />
     <Compile Include="ViewModels\CompanyDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\EventAdministrationPageViewModel.cs" />
+    <Compile Include="ViewModels\EventDetailPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\PromotionAdministrationPageViewModel.cs" />
+    <Compile Include="ViewModels\PromotionDetailPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -123,8 +127,20 @@
     <Compile Include="Views\CompanyDetailPage.xaml.cs">
       <DependentUpon>CompanyDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EventAdministrationPage.xaml.cs">
+      <DependentUpon>EventAdministrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventDetailPage.xaml.cs">
+      <DependentUpon>EventDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PromotionAdministrationPage.xaml.cs">
+      <DependentUpon>PromotionAdministrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PromotionDetailPage.xaml.cs">
+      <DependentUpon>PromotionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -194,9 +210,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EventAdministrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EventDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PromotionAdministrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PromotionDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchPage.xaml">
       <SubType>Designer</SubType>
