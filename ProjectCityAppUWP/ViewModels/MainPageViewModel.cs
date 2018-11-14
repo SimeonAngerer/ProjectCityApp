@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
-using ProjectCityAppUWP.Models;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using Newtonsoft.Json;
+using SharedClasses;
 
 namespace ProjectCityAppUWP.ViewModels
 {

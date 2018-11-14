@@ -8,7 +8,6 @@ using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
-using ProjectCityAppUWP.Models;
 using ProjectCityAppUWP.ViewModels;
 
 namespace ProjectCityAppUWP
