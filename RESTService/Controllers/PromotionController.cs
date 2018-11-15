@@ -21,7 +21,6 @@ namespace RESTService.Controllers
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
-                FK_DiscountID = x.FK_DiscountID,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title
@@ -36,7 +35,6 @@ namespace RESTService.Controllers
                 Description = tempValue.Description,
                 Expiration = tempValue.Expiration,
                 FK_CompanyID = tempValue.FK_CompanyID,
-                FK_DiscountID = tempValue.FK_DiscountID,
                 PK_PromotionID = tempValue.PK_PromotionID,
                 Start = tempValue.Start,
                 Title = tempValue.Title
@@ -50,7 +48,6 @@ namespace RESTService.Controllers
                 Description = value.Description,
                 Expiration = value.Expiration,
                 FK_CompanyID = value.FK_CompanyID,
-                FK_DiscountID = value.FK_DiscountID,
                 PK_PromotionID = value.PK_PromotionID,
                 Start = value.Start,
                 Title = value.Title
@@ -78,14 +75,13 @@ namespace RESTService.Controllers
 
         #endregion
 
-        public IEnumerable<SharedPromotion> GetPromotionByCompanyID(Guid id)
+        public IEnumerable<SharedPromotion> GetPromotionByCompanyID(Guid companyID)
         {
-            return model.Promotions.Where(x => x.FK_CompanyID == id).Select(x => new SharedPromotion()
+            return model.Promotions.Where(x => x.FK_CompanyID == companyID).Select(x => new SharedPromotion()
             {
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
-                FK_DiscountID = x.FK_DiscountID,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title
@@ -99,7 +95,6 @@ namespace RESTService.Controllers
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
-                FK_DiscountID = x.FK_DiscountID,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title

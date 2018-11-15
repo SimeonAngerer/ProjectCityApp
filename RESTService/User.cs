@@ -17,8 +17,7 @@ namespace RESTService
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Customers = new HashSet<Customer>();
-            this.Entrepreneurs = new HashSet<Entrepreneur>();
+            this.Followers = new HashSet<Follower>();
         }
     
         public System.Guid PK_UserID { get; set; }
@@ -27,10 +26,11 @@ namespace RESTService
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTime DateOfBirth { get; set; }
+        public string Type { get; set; }
+        public Nullable<System.Guid> FK_CompanyID { get; set; }
     
+        public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entrepreneur> Entrepreneurs { get; set; }
+        public virtual ICollection<Follower> Followers { get; set; }
     }
 }

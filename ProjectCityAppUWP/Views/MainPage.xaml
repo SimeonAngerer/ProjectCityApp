@@ -8,11 +8,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:ProjectCityAppUWP.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vm="using:ProjectCityAppUWP.ViewModels" mc:Ignorable="d">
-
-    <Page.DataContext>
-        <vm:MainPageViewModel x:Name="ViewModel" />
-    </Page.DataContext>
+      xmlns:vm="using:ProjectCityAppUWP.ViewModels" mc:Ignorable="d"
+      DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}">
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
@@ -23,7 +20,7 @@
         <GridView ItemsSource="{Binding Companies}" Margin="5" RelativePanel.Below="pageHeader" x:Name="gridView">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Button Background="White" Command="{Binding Command}" CommandParameter="{Binding PK_CompanyID}" >
+                    <Button Background="White" Command="{Binding Main.CmdGoToCompanyDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_CompanyID}" >
                         <StackPanel Orientation="Vertical">
                             <Image Height="200" Width="300" Source="{Binding Image}" Margin="2" />
                             <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" Margin="2" />
