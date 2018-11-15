@@ -15,5 +15,6 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" Text="{Binding Test}">
         </controls:PageHeader>
-    </RelativePanel>
+		<TextBlock Text="EVENTDETAILPAGE WORKS"/>
+	</RelativePanel>
 </Page>
