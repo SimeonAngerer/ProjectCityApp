@@ -116,6 +116,7 @@
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserAdministrationPageViewModel.cs" />
+    <Compile Include="ViewModels\UserSignUpPageViewModel.cs" />
     <Compile Include="ViewModels\UserSignInPageViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
