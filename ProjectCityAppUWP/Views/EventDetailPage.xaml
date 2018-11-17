@@ -13,8 +13,44 @@
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" Text="{Binding Test}">
+                             RelativePanel.AlignTopWithPanel="True" Text="{Binding Event.Name}">
         </controls:PageHeader>
-		<TextBlock Text="EVENTDETAILPAGE WORKS"/>
+
+		<StackPanel Orientation="Vertical" RelativePanel.Below="pageHeader" Padding="15, 0">
+			<TextBlock Text="{Binding Event.Name}" FontSize="48" Margin="5,5,5,0"/>
+			<TextBlock FontSize="32" Margin="40,0,0,15" Foreground="Gray">
+				<Run Text="By"/>
+				<Run Text="{Binding Company.Name}"/>
+			</TextBlock>
+
+			<Image Source="https://dummyimage.com/450x300/000000/fff.jpg" Margin="5" Height="300" Width="450" />
+			<Grid Width="auto" MaxWidth="450" Height="auto" Margin="0,20,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<TextBlock Text="Description" Grid.Column="0" Grid.Row="0" FontWeight="Bold" Padding="10,2"/>
+				<TextBlock Text="Date" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Padding="10,2"/>
+				<TextBlock Text="Address" Grid.Column="0" Grid.Row="2" FontWeight="Bold" Padding="10,2"/>
+
+				<TextBlock Text="This is a dummy desciption for this event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+						   TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Padding="10,2" />
+				<TextBlock Text="{Binding Event.Date}" Grid.Column="1" Grid.Row="1" Padding="10,2" SelectionChanged="TextBlock_SelectionChanged" />
+				<TextBlock  Grid.Column="1" Grid.Row="2" Padding="10,2">
+					<Run Text="{Binding Event.Street}" />
+					<Run Text="," />
+					<Run Text="{Binding Event.ZipCode}" />
+					<Run Text="{Binding Event.City}" />
+				</TextBlock>
+			</Grid>
+
+		</StackPanel>
+
 	</RelativePanel>
 </Page>
