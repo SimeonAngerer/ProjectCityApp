@@ -41,7 +41,7 @@
 
 				<TextBlock Text="This is a dummy desciption for this event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 						   TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Padding="10,2" />
-				<TextBlock Text="{Binding Event.Date}" Grid.Column="1" Grid.Row="1" Padding="10,2" SelectionChanged="TextBlock_SelectionChanged" />
+				<TextBlock Text="{Binding Event.Date}" Grid.Column="1" Grid.Row="1" Padding="10,2" />
 				<TextBlock  Grid.Column="1" Grid.Row="2" Padding="10,2">
 					<Run Text="{Binding Event.Street}" />
 					<Run Text="," />
