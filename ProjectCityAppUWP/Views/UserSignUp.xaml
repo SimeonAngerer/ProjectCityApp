@@ -45,12 +45,12 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
                 <PasswordBox x:Name="Password" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
                 <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Repeat Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <PasswordBox x:Name="PasswordConfirm" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Password="{Binding PasswordCheck,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
-                <DatePicker x:Name="Birthday" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Header="date of birth:" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"/>
+                <PasswordBox x:Name="PasswordConfirm" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Password="{Binding PasswordConfirm,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <DatePicker x:Name="Birthday" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Header="date of birth:" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Date="{Binding Birthday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="How will you use this app?" Margin="5" HorizontalAlignment="Stretch"/>
                 <StackPanel Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Padding="5" HorizontalAlignment="Stretch">
-                    <RadioButton x:Name="Customer" Content="as a Customer" Checked="Customer_Checked"/>
-                    <RadioButton x:Name="Entrepreneur" Content="as an Entrepreneur" Checked="Entrepreneur_Checked"/>
+                    <RadioButton x:Name="Customer" Content="as a Customer" IsChecked="{Binding Customer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <RadioButton x:Name="Entrepreneur" Content="as an Entrepreneur" IsChecked="{Binding Entrepreneur,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <Button Grid.Row="9" Margin="0,7,-0.5,0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Sign Up" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.RowSpan="2" />
             </Grid>

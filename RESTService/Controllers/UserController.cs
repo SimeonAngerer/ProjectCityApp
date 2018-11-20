@@ -1,4 +1,5 @@
-﻿using SharedClasses;
+﻿using Newtonsoft.Json;
+using SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +41,9 @@ namespace RESTService.Controllers
             };
         }
 
-        public void Post([FromBody]SharedUser value)
+        public void Post([FromBody]string valuestring)
         {
+            SharedUser value = JsonConvert.DeserializeObject<SharedUser>(valuestring);
             model.Users.Add(new User()
             {
                 DateOfBirth = value.DateOfBirth,

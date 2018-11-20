@@ -32,7 +32,8 @@
             <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Password:" Width="200" Margin="5" />
             <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="5" />
-            <Button Grid.Row="2" Grid.Column="0" Command="{Binding BtnLogin}" Content="Login" Width="200" Margin="5" />
+            <Button Grid.Row="2" Grid.Column="1" Command="{Binding BtnLogin}" Content="Login" Width="200" Margin="5" />
+            <Button Grid.Row="2" Grid.Column="0" Command="{Binding BtnToSignUp}" Content="No account yet? Sign Up! " Width="200" Margin="5" />
         </Grid>
     </RelativePanel>
 </Page>

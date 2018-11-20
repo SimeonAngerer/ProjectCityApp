@@ -30,10 +30,12 @@ namespace ProjectCityAppUWP.ViewModels
         }
 
         public DelegateCommand BtnLogin { get; set; }
+        public DelegateCommand BtnToSignUp { get; set; }
 
         public UserSignInPageViewModel()
         {
             BtnLogin = new DelegateCommand(Login);
+            BtnToSignUp = new DelegateCommand(ToSignUp);
         }
 
         private async void Login()
@@ -47,7 +49,11 @@ namespace ProjectCityAppUWP.ViewModels
                 NavigationService.Navigate(typeof(Views.MainPage));
                 // TODO Inform Shell, currently it's a workaround
             }
+        }
 
+        private void ToSignUp()
+        {
+            NavigationService.Navigate(typeof(Views.UserSignUp));
         }
     }
 }
