@@ -15,24 +15,30 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" Text="Login">
         </controls:PageHeader>
-        <StackPanel  Background="LightSteelBlue" Padding="40"  Orientation="Vertical" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
+        <ScrollViewer  Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
             <Grid RelativePanel.Below="pageHeader">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition/>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="74"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="42*"/>
+                    <RowDefinition Height="32*"/>
+                    <RowDefinition Height="39*"/>
+
+
                 </Grid.RowDefinitions>
                 <TextBlock FontWeight="Bold" Foreground="White"  Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" FontSize="30" VerticalAlignment="Top" Text="Sign Up" HorizontalTextAlignment="Center" Margin="0,10,0,20" HorizontalAlignment="Stretch">
                 </TextBlock>
@@ -46,14 +52,26 @@
                 <PasswordBox x:Name="Password" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
                 <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Repeat Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
                 <PasswordBox x:Name="PasswordConfirm" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Password="{Binding PasswordConfirm,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
-                <DatePicker x:Name="Birthday" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Header="date of birth:" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" Date="{Binding Birthday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                    <DatePicker x:Name="Birthday" Header="Date of Birth:" HorizontalAlignment="Stretch" Margin="5" Height="Auto" Date="{Binding Birthday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
                 <TextBlock Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="How will you use this app?" Margin="5" HorizontalAlignment="Stretch"/>
                 <StackPanel Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Padding="5" HorizontalAlignment="Stretch">
                     <RadioButton x:Name="Customer" Content="as a Customer" IsChecked="{Binding Customer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <RadioButton x:Name="Entrepreneur" Content="as an Entrepreneur" IsChecked="{Binding Entrepreneur,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <Button Grid.Row="9" Margin="0,7,-0.5,0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Sign Up" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.RowSpan="2" />
+                <TextBlock Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Text="Company name:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="CompanyName" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Text="Street:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Street" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Street,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Text="Postalcode:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="PostalCode" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Postalcode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Text="City:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="City" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" Text="Company Logo:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                <Button  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Grid.Row="13" Grid.Column="1"   Margin="5" HorizontalAlignment="Stretch" Content="Upload Image"/>
+                <Button Grid.Row="14" Margin="0,7,-0.5,0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Sign Up" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.RowSpan="2" />
             </Grid>
-        </StackPanel>
+        </ScrollViewer>
     </RelativePanel>
 </Page>

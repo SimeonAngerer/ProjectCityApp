@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.UI.Xaml;
 
 namespace ProjectCityAppUWP.ViewModels
 {
@@ -19,6 +20,17 @@ namespace ProjectCityAppUWP.ViewModels
         {
             get { return user.UserName; }
             set { user.UserName = value; RaisePropertyChanged(); }
+        }
+
+        private Visibility visible;
+        public Visibility Visible
+        {
+            get { return this.visible; }
+            set
+            {
+                this.visible = value;
+                RaisePropertyChanged();
+            }
         }
 
         private string password;
@@ -43,14 +55,15 @@ namespace ProjectCityAppUWP.ViewModels
             {
                 entrepreneur = value;
                 user.Type = "entrepreneur";
+                changeVisible();
                 RaisePropertyChanged();
             }
         }
 
         public DateTime Birthday
         {
-            get { return user.DateOfBirth;}
-            set {  user.DateOfBirth = value; RaisePropertyChanged(); }
+            get { return user.DateOfBirth; }
+            set { user.DateOfBirth = value; RaisePropertyChanged(); }
         }
 
         public bool Customer
@@ -60,6 +73,7 @@ namespace ProjectCityAppUWP.ViewModels
             {
                 entrepreneur = !value;
                 user.Type = "customer";
+                changeVisible();
                 RaisePropertyChanged();
             }
         }
@@ -68,6 +82,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public UserSignUpPageViewModel()
         {
+            Customer = true;
             BtnSignUp = new DelegateCommand(SignUp);
         }
 
@@ -75,13 +90,30 @@ namespace ProjectCityAppUWP.ViewModels
         {
             HttpClient client = new HttpClient();
             HttpContent content = new StringContent(JsonConvert.SerializeObject(user));
-            var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"),content);
+            var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"), content);
             if (user != null)
             {
                 NavigationService.Navigate(typeof(Views.UserSignIn));
                 // TODO Inform Shell, currently it's a workaround
             }
 
+        }
+
+        private void changeVisible()
+        {
+            if (this.entrepreneur)
+            {
+                this.Visible = Visibility.Visible;
+            }
+            else
+            {
+                this.Visible = Visibility.Collapsed;
+            }
+        }
+
+        private void clearCompany()
+        {
+            this.user.FK_CompanyID = default(Guid); // this foreign key should optional, not required
         }
     }
 }
