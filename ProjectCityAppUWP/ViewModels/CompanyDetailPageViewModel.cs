@@ -17,16 +17,20 @@ namespace ProjectCityAppUWP.ViewModels
         public SharedCompany Company { get; set; }
         public DelegateCommand BtnFacebook { get; set; }
         public DelegateCommand BtnLike { get; set; }
+		public DelegateCommand<Guid> CmdGoToEventDetail { get; set; }
+		public DelegateCommand<Guid> CmdGoToPromotionDetail { get; set; }
 
 		public ObservableCollection<SharedEvent> Events { get; set; }
-		public ObservableCollection<SharedEvent> Promotions { get; set; }
+		public ObservableCollection<SharedPromotion> Promotions { get; set; }
 
 
 		public CompanyDetailPageViewModel()
         {
             BtnFacebook = new DelegateCommand(OpenFacebook);
             BtnLike = new DelegateCommand(LikeCompany);
-        }
+			CmdGoToEventDetail = new DelegateCommand<Guid>(GoToEventDetail);
+			CmdGoToPromotionDetail = new DelegateCommand<Guid>(GoToPromotionDetail);
+		}
 
         private async void LikeCompany()
         {
@@ -49,6 +53,7 @@ namespace ProjectCityAppUWP.ViewModels
         {
             GetCompany((Guid)parameter);
 			GetEvents((Guid)parameter);
+			GetPromotions((Guid)parameter);
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
@@ -71,10 +76,36 @@ namespace ProjectCityAppUWP.ViewModels
 			foreach (var item in list)
 			{
 				// Navigate to eventpage
-				// item.Command = new DelegateCommand<Guid>(GoToCompanyDetail);     // Workaround!!!
+				// item.Command = new DelegateCommand<Guid>(GoToEventDetail);
 				Events.Add(item);
 			}
 			RaisePropertyChanged("Events");
+		}
+
+		public async void GetPromotions(Guid companyId)
+		{
+			if (Promotions == null) { Promotions = new ObservableCollection<SharedPromotion>(); }
+			Promotions.Clear();
+			HttpClient client = new HttpClient();
+			string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Promotion?companyID=" + companyId));
+			var list = JsonConvert.DeserializeObject<List<SharedPromotion>>(res);
+			foreach (var item in list)
+			{
+				// Navigate to promotionpage
+				// item.Command = new DelegateCommand<Guid>(GoToPromotionDetail);
+				Promotions.Add(item);
+			}
+			RaisePropertyChanged("Promotions");
+		}
+
+		private void GoToEventDetail(Guid guid)
+		{
+			NavigationService.Navigate(typeof(Views.EventDetailPage), guid);
+		}
+
+		private void GoToPromotionDetail(Guid guid)
+		{
+			NavigationService.Navigate(typeof(Views.PromotionDetailPage), guid);
 		}
 
 	}

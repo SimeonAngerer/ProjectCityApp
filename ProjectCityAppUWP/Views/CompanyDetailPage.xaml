@@ -37,21 +37,24 @@
 			<!-- Events -->
 			<StackPanel Orientation="Vertical">
 				<TextBlock Text="Events" FontSize="36" Margin="5"/>
-				<ListView ItemsSource="{Binding Events}" >
+				<ListView ItemsSource="{Binding Events}">
 					<ListView.ItemTemplate>
 						<DataTemplate>
-							<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
-								<Ellipse Height="64" Width="64" VerticalAlignment="Center">
-									<Ellipse.Fill>
-										<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
-									</Ellipse.Fill>
-								</Ellipse>
-								<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
-									<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-									<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+							<Button Command="{Binding CompanyDetail.CmdGoToEventDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_EventID}"
+									Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+								<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
+									<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+										<Ellipse.Fill>
+											<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+										</Ellipse.Fill>
+									</Ellipse>
+									<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+										<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+										<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+										<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+									</StackPanel>
 								</StackPanel>
-							</StackPanel>
+							</Button>
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>
@@ -59,21 +62,30 @@
 			<!-- Promotions -->
 			<StackPanel Orientation="Vertical">
 				<TextBlock Text="Promotions" FontSize="36" Margin="5"/>
-				<ListView ItemsSource="{Binding Events}" >
+				<ListView ItemsSource="{Binding Promotions}" >
 					<ListView.ItemTemplate>
 						<DataTemplate>
-							<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
-								<Ellipse Height="64" Width="64" VerticalAlignment="Center">
-									<Ellipse.Fill>
-										<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
-									</Ellipse.Fill>
-								</Ellipse>
-								<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
-									<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
-									<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-									<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+							<Button Command="{Binding CompanyDetail.CmdGoToPromotionDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_PromotionID}"
+									Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+								<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Title}">
+									<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+										<Ellipse.Fill>
+											<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+										</Ellipse.Fill>
+									</Ellipse>
+									<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+										<TextBlock Text="{Binding Title}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+										<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+										<Run Text="From "/>
+										<Run Text="{Binding Start}" />
+										</TextBlock>
+										<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+										<Run Text="Until "/>
+										<Run Text="{Binding Expiration}" />
+										</TextBlock>
+									</StackPanel>
 								</StackPanel>
-							</StackPanel>
+							</Button>
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>

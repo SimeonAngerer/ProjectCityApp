@@ -28,7 +28,22 @@ namespace RESTService.Controllers
             }).ToList();
         }
 
-        public void Post([FromBody]SharedEvent value)
+		public SharedEvent Get(Guid id)
+		{
+			var tempValue = model.Events.SingleOrDefault(x => x.PK_EventID == id);
+			return new SharedEvent()
+			{
+				City = tempValue.City,
+				Date = tempValue.Date,
+				FK_CompanyID = tempValue.FK_CompanyID,
+				Name = tempValue.Name,
+				PK_EventID = tempValue.PK_EventID,
+				Street = tempValue.Street,
+				ZipCode = tempValue.Zipcode
+			};
+		}
+
+		public void Post([FromBody]SharedEvent value)
         {
             model.Events.Add(new Event()
             {
