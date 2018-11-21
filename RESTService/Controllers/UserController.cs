@@ -24,7 +24,9 @@ namespace RESTService.Controllers
                 LastName = x.LastName,
                 Password = x.Password,
                 PK_UserID = x.PK_UserID,
-                UserName = x.UserName
+                UserName = x.UserName,
+                FK_CompanyID = x.FK_CompanyID.HasValue ? x.FK_CompanyID.Value : Guid.Empty,
+                Type = x.Type
             });
         }
 
@@ -37,7 +39,9 @@ namespace RESTService.Controllers
                 FirstName = tempValue.FirstName,
                 LastName = tempValue.LastName,
                 PK_UserID = tempValue.PK_UserID,
-                UserName = tempValue.UserName
+                UserName = tempValue.UserName,
+                FK_CompanyID = tempValue.FK_CompanyID.HasValue ? tempValue.FK_CompanyID.Value : Guid.Empty,
+                Type = tempValue.Type
             };
         }
 
@@ -50,7 +54,9 @@ namespace RESTService.Controllers
                 LastName = value.LastName,
                 Password = value.Password,
                 PK_UserID = value.PK_UserID,
-                UserName = value.UserName
+                UserName = value.UserName,
+                FK_CompanyID = value.FK_CompanyID,
+                Type = value.Type
             });
             model.SaveChanges();
         }
@@ -87,7 +93,9 @@ namespace RESTService.Controllers
                     FirstName = tempUser.FirstName,
                     LastName = tempUser.LastName,
                     PK_UserID = tempUser.PK_UserID,
-                    UserName = tempUser.UserName
+                    UserName = tempUser.UserName,
+                    FK_CompanyID = tempUser.FK_CompanyID.HasValue ? tempUser.FK_CompanyID.Value : Guid.Empty,
+                    Type = tempUser.Type
                 };
             }
             else

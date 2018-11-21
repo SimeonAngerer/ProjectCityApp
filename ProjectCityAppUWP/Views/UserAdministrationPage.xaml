@@ -18,6 +18,113 @@
                              RelativePanel.AlignTopWithPanel="True" Text="User Administration">
         </controls:PageHeader>
 
-        <Button Content="Logout" RelativePanel.Below="pageHeader" Command="{Binding BtnLogout}" Margin="5" />
+        <ScrollViewer Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
+            <StackPanel Orientation="Horizontal">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                        <RowDefinition Height="42*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnLogout}" Content="Logout" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Username:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox x:Name="Username" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Firstname:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox x:Name="Firstname" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Firstname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Lastname:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox x:Name="Lastname" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Lastname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <PasswordBox x:Name="Password" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Repeat Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <PasswordBox x:Name="PasswordConfirm" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Password="{Binding PasswordConfirm,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                        <DatePicker x:Name="Birthday" Header="Date of Birth:" HorizontalAlignment="Stretch" Margin="5" Height="Auto" Date="{Binding Birthday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <TextBlock Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Text="Company name:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="CompanyName" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Text="Street:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Street" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Street,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Text="Postalcode:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="PostalCode" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Postalcode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Text="City:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="City" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" Text="{Binding City,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Text="Facebook Link:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Facebook" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Facebook,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                    <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" Text="Company Logo:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
+                    <Button  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Grid.Row="13" Grid.Column="1"   Margin="5" HorizontalAlignment="Stretch" Content="Upload Image"/>
+                    <Button Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Update" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                </Grid>
+                <StackPanel Orientation="Vertical">
+                    <!-- Events -->
+                    <TextBlock Text="Events" FontSize="36" Margin="5"/>
+                    <ListView ItemsSource="{Binding Events}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding UserAdministration.CmdGoToEventAdministration, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_EventID}"
+								Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                    <StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
+                                        <Ellipse Height="64" Width="64" VerticalAlignment="Center">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+                                            <TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                            <TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!-- Promotions -->
+                    <TextBlock Text="Promotions" FontSize="36" Margin="5"/>
+                    <ListView ItemsSource="{Binding Promotions}" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding UserAdministration.CmdGoToPromotionAdministration, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_PromotionID}"
+								Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                    <StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Title}">
+                                        <Ellipse Height="64" Width="64" VerticalAlignment="Center">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Title}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+                                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+									<Run Text="From "/>
+									<Run Text="{Binding Start}" />
+                                            </TextBlock>
+                                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+									<Run Text="Until "/>
+									<Run Text="{Binding Expiration}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </RelativePanel>
 </Page>
