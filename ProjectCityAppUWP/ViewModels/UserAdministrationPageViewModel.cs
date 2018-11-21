@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using ProjectCityAppUWP.Helpers;
 using SharedClasses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
@@ -14,6 +16,11 @@ namespace ProjectCityAppUWP.ViewModels
 {
     public class UserAdministrationPageViewModel : ViewModelBase
     {
+        #region Properties
+        public string Type { get; set; }
+        public Guid PK_UserID { get; set; }
+        public Guid FK_CompanyID { get; set; }
+
         private string userName;
 
         public string UserName
@@ -115,17 +122,68 @@ namespace ProjectCityAppUWP.ViewModels
             get { return promotions; }
             set { promotions = value; RaisePropertyChanged(); }
         }
-
+        #endregion Properties
 
         public DelegateCommand<Guid> CmdGoToEventAdministration { get; set; }
         public DelegateCommand<Guid> CmdGoToPromotionAdministration { get; set; }
+        public DelegateCommand BtnUpdate { get; set; }
         public DelegateCommand BtnLogout { get; set; }
+
         public UserAdministrationPageViewModel()
         {
             // Delegates
+            CmdGoToEventAdministration = new DelegateCommand<Guid>(GoToEventAdministration);
+            CmdGoToPromotionAdministration = new DelegateCommand<Guid>(GoToPromotionAdministration);
+            BtnUpdate = new DelegateCommand(Update);
             BtnLogout = new DelegateCommand(Logout);
 
             GetData();
+        }
+
+        private void GoToPromotionAdministration(Guid guid)
+        {
+            NavigationService.Navigate(typeof(Views.PromotionAdministrationPage), guid);
+        }
+
+        private void GoToEventAdministration(Guid guid)
+        {
+            NavigationService.Navigate(typeof(Views.EventAdministrationPage), guid);
+        }
+
+        private async void Update()
+        {
+            SharedUser tempUser = new SharedUser()
+            {
+                DateOfBirth = Birthday,
+                FirstName = Firstname,
+                LastName = Lastname,
+                Password = HashMethods.ComputeMD5(Password),
+                UserName = UserName
+            };
+            HttpClient client = new HttpClient();
+            var myContent = JsonConvert.SerializeObject(tempUser);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var result = await client.PutAsync(new Uri("http://localhost:51070/api/User/" + PK_UserID), byteContent);
+
+            if (Type == "Entrepreneur")
+            {
+                SharedCompany tempCompany = new SharedCompany()
+                {
+                    City = City,
+                    Facebook = Facebook,
+                    Name = CompanyName,
+                    Street = Street,
+                    ZipCode = Postalcode
+                };
+                myContent = JsonConvert.SerializeObject(tempCompany);
+                buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+                byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                result = await client.PutAsync(new Uri("http://localhost:51070/api/Company/" + FK_CompanyID), byteContent);
+            }
+            NavigationService.Navigate(typeof(Views.MainPage));
         }
 
         private async void GetData()
@@ -135,10 +193,12 @@ namespace ProjectCityAppUWP.ViewModels
             HttpClient client = new HttpClient();
             string temp = await client.GetStringAsync(new Uri("http://localhost:51070/api/User/" + tempUserId));
             SharedUser user = JsonConvert.DeserializeObject<SharedUser>(temp);
+            PK_UserID = user.PK_UserID;
             UserName = user.UserName;
             Firstname = user.FirstName;
             Lastname = user.LastName;
             Birthday = user.DateOfBirth;
+            Type = user.Type;
             
 
             if (user.Type == "Entrepreneur")
@@ -146,6 +206,7 @@ namespace ProjectCityAppUWP.ViewModels
                 // Get the Company
                 temp = await client.GetStringAsync(new Uri("http://localhost:51070/api/Company/" + user.FK_CompanyID));
                 SharedCompany company = JsonConvert.DeserializeObject<SharedCompany>(temp);
+                FK_CompanyID = user.FK_CompanyID;
                 CompanyName = company.Name;
                 Street = company.Street;
                 Postalcode = company.ZipCode;

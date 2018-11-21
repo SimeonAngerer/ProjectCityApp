@@ -68,7 +68,7 @@
                     <TextBox  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Facebook" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Facebook,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                     <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" Text="Company Logo:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
                     <Button  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Grid.Row="13" Grid.Column="1"   Margin="5" HorizontalAlignment="Stretch" Content="Upload Image"/>
-                    <Button Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Update" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                    <Button Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnUpdate}" Content="Update" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                 </Grid>
                 <StackPanel Orientation="Vertical">
                     <!-- Events -->
@@ -110,12 +110,12 @@
                                         <StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
                                             <TextBlock Text="{Binding Title}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
                                             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
-									<Run Text="From "/>
-									<Run Text="{Binding Start}" />
+									            <Run Text="From "/>
+									            <Run Text="{Binding Start}" />
                                             </TextBlock>
                                             <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
-									<Run Text="Until "/>
-									<Run Text="{Binding Expiration}" />
+									            <Run Text="Until "/>
+									            <Run Text="{Binding Expiration}" />
                                             </TextBlock>
                                         </StackPanel>
                                     </StackPanel>

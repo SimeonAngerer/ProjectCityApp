@@ -102,6 +102,7 @@ namespace ProjectCityAppUWP.ViewModels
         private async void SignUp()
         {
             user.PK_UserID = Guid.NewGuid();
+            user.Password = HashMethods.ComputeMD5(user.Password);
             HttpClient client = new HttpClient();
             var myContent = JsonConvert.SerializeObject(user);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
