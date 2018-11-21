@@ -41,9 +41,8 @@ namespace RESTService.Controllers
             };
         }
 
-        public void Post([FromBody]string valuestring)
+        public void Post([FromBody]SharedUser value)
         {
-            SharedUser value = JsonConvert.DeserializeObject<SharedUser>(valuestring);
             model.Users.Add(new User()
             {
                 DateOfBirth = value.DateOfBirth,

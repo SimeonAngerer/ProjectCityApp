@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
@@ -15,6 +16,18 @@ namespace ProjectCityAppUWP.ViewModels
     public class UserSignUpPageViewModel : ViewModelBase
     {
         private SharedUser user = new SharedUser();
+
+        public string Firstname
+        {
+            get { return user.FirstName; }
+            set { user.FirstName = value; RaisePropertyChanged(); }
+        }
+
+        public string Lastname
+        {
+            get { return user.LastName; }
+            set { user.LastName = value; RaisePropertyChanged(); }
+        }
 
         public string UserName
         {
@@ -88,9 +101,14 @@ namespace ProjectCityAppUWP.ViewModels
 
         private async void SignUp()
         {
+            user.PK_UserID = Guid.NewGuid();
             HttpClient client = new HttpClient();
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(user));
-            var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"), content);
+            var myContent = JsonConvert.SerializeObject(user);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            //HttpContent content = new StringContent(JsonConvert.SerializeObject(user));
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"), byteContent);
             if (user != null)
             {
                 NavigationService.Navigate(typeof(Views.UserSignIn));
