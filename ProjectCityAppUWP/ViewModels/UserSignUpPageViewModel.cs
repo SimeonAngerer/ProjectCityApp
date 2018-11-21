@@ -73,10 +73,10 @@ namespace ProjectCityAppUWP.ViewModels
             }
         }
 
-        public DateTime Birthday
+        public DateTimeOffset Birthday
         {
             get { return user.DateOfBirth; }
-            set { user.DateOfBirth = value; RaisePropertyChanged(); }
+            set { user.DateOfBirth = value.DateTime; RaisePropertyChanged(); }
         }
 
         public bool Customer
@@ -97,6 +97,7 @@ namespace ProjectCityAppUWP.ViewModels
         {
             Customer = true;
             BtnSignUp = new DelegateCommand(SignUp);
+            user.DateOfBirth = DateTime.Now;
         }
 
         private async void SignUp()

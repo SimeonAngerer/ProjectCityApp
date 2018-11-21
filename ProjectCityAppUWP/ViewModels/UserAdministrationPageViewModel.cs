@@ -58,9 +58,9 @@ namespace ProjectCityAppUWP.ViewModels
             get { return passwordConfirm; }
             set { passwordConfirm = value; RaisePropertyChanged(); }
         }
-        private DateTime birthday;
+        private DateTimeOffset birthday;
 
-        public DateTime Birthday
+        public DateTimeOffset Birthday
         {
             get { return birthday; }
             set { birthday = value; RaisePropertyChanged(); }
@@ -154,7 +154,7 @@ namespace ProjectCityAppUWP.ViewModels
         {
             SharedUser tempUser = new SharedUser()
             {
-                DateOfBirth = Birthday,
+                DateOfBirth = Birthday.DateTime,
                 FirstName = Firstname,
                 LastName = Lastname,
                 Password = HashMethods.ComputeMD5(Password),

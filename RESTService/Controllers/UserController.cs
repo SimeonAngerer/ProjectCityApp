@@ -47,7 +47,7 @@ namespace RESTService.Controllers
 
         public void Post([FromBody]SharedUser value)
         {
-            model.Users.Add(new User()
+            var user = new User()
             {
                 DateOfBirth = value.DateOfBirth,
                 FirstName = value.FirstName,
@@ -55,9 +55,10 @@ namespace RESTService.Controllers
                 Password = value.Password,
                 PK_UserID = value.PK_UserID,
                 UserName = value.UserName,
-                FK_CompanyID = value.FK_CompanyID,
                 Type = value.Type
-            });
+            };
+            if(value.FK_CompanyID != Guid.Empty) { user.FK_CompanyID = value.FK_CompanyID; }
+            model.Users.Add(user);
             model.SaveChanges();
         }
 
