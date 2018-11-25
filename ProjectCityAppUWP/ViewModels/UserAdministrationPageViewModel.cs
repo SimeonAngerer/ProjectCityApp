@@ -126,6 +126,8 @@ namespace ProjectCityAppUWP.ViewModels
 
         public DelegateCommand<Guid> CmdGoToEventAdministration { get; set; }
         public DelegateCommand<Guid> CmdGoToPromotionAdministration { get; set; }
+        public DelegateCommand CmdCreateEvent { get; set; }
+        public DelegateCommand CmdCreatePromotion { get; set; }
         public DelegateCommand BtnUpdate { get; set; }
         public DelegateCommand BtnLogout { get; set; }
 
@@ -134,10 +136,22 @@ namespace ProjectCityAppUWP.ViewModels
             // Delegates
             CmdGoToEventAdministration = new DelegateCommand<Guid>(GoToEventAdministration);
             CmdGoToPromotionAdministration = new DelegateCommand<Guid>(GoToPromotionAdministration);
+            CmdCreateEvent = new DelegateCommand(CreateEvent);
+            CmdCreatePromotion = new DelegateCommand(CreatePromotion);
             BtnUpdate = new DelegateCommand(Update);
             BtnLogout = new DelegateCommand(Logout);
 
             GetData();
+        }
+
+        private void CreatePromotion()
+        {
+            NavigationService.Navigate(typeof(Views.PromotionAdministrationPage), Guid.Empty);
+        }
+
+        private void CreateEvent()
+        {
+            NavigationService.Navigate(typeof(Views.EventAdministrationPage), Guid.Empty);
         }
 
         private void GoToPromotionAdministration(Guid guid)

@@ -19,7 +19,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Guid promotionGuid = (Guid)parameter;           // Here you get the guid of the current promotion
+            Guid promotionGuid = (Guid)parameter;           // Here you get the guid of the current promotion; Guid.Empty if it is a new promotion
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
     }

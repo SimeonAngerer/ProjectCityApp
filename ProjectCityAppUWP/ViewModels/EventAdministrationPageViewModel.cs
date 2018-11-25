@@ -19,7 +19,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
-            Guid eventGuid = (Guid)parameter;           // Here you get the guid of the current event
+            Guid eventGuid = (Guid)parameter;           // Here you get the guid of the current event; Guid.Empty if it is a new event
             return base.OnNavigatedToAsync(parameter, mode, state);
         }
     }
