@@ -217,6 +217,8 @@ namespace ProjectCityAppUWP.ViewModels
 
             if (user.Type == "Entrepreneur")
             {
+                Visible = Visibility.Visible;
+
                 // Get the Company
                 temp = await client.GetStringAsync(new Uri("http://localhost:51070/api/Company/" + user.FK_CompanyID));
                 SharedCompany company = JsonConvert.DeserializeObject<SharedCompany>(temp);
