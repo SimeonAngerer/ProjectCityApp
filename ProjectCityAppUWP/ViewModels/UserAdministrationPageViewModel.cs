@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 
 namespace ProjectCityAppUWP.ViewModels
 {
@@ -142,6 +143,12 @@ namespace ProjectCityAppUWP.ViewModels
             BtnLogout = new DelegateCommand(Logout);
 
             GetData();
+        }
+
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            GetData();
+            return base.OnNavigatedToAsync(parameter, mode, state);
         }
 
         private void CreatePromotion()
