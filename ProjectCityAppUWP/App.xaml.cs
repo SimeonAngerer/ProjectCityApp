@@ -32,7 +32,7 @@ namespace ProjectCityAppUWP
 
             #endregion
 
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Clear();
+            //Windows.Storage.ApplicationData.Current.LocalSettings.Values.Clear();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

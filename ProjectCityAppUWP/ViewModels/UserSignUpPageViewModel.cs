@@ -73,10 +73,10 @@ namespace ProjectCityAppUWP.ViewModels
             }
         }
 
-        public DateTime Birthday
+        public DateTimeOffset Birthday
         {
             get { return user.DateOfBirth; }
-            set { user.DateOfBirth = value; RaisePropertyChanged(); }
+            set { user.DateOfBirth = value.DateTime; RaisePropertyChanged(); }
         }
 
         public bool Customer
@@ -97,11 +97,13 @@ namespace ProjectCityAppUWP.ViewModels
         {
             Customer = true;
             BtnSignUp = new DelegateCommand(SignUp);
+            user.DateOfBirth = DateTime.Now;
         }
 
         private async void SignUp()
         {
             user.PK_UserID = Guid.NewGuid();
+            user.Password = HashMethods.ComputeMD5(user.Password);
             HttpClient client = new HttpClient();
             var myContent = JsonConvert.SerializeObject(user);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
