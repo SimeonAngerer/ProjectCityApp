@@ -21,6 +21,7 @@
 					<VisualState.Setters>
 						<Setter Target="EventsAndPromotionsPanel.Orientation" Value="Vertical" />
 						<Setter Target="AllContentPanel.Orientation" Value="Vertical" />
+						<Setter Target="CompanyDetailsPanel.BorderThickness" Value="0,0,0,1" />
 					</VisualState.Setters>
 				</VisualState>
 				<VisualState x:Name="NarrowLayout">
@@ -49,108 +50,120 @@
                              RelativePanel.AlignTopWithPanel="True" Text="{Binding Company.Name}">
         </controls:PageHeader>
 
-		<StackPanel Orientation="Horizontal" x:Name="AllContentPanel" RelativePanel.Below="pageHeader" 
-					Margin="24,24,24,0" BorderBrush="Black" BorderThickness="1">
-			<StackPanel Orientation="Vertical" BorderBrush="Black" BorderThickness="0 0 1 0">
-				<TextBlock Text="{Binding Company.Name}" FontSize="48" Margin="20,5"/>
-				<Image Source="{Binding Company.Image}" Height="300" Width="450" />
+		<ScrollViewer ZoomMode="Disabled" RelativePanel.Below="pageHeader"
+			IsVerticalScrollChainingEnabled="True"
+			HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible"
+			VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
 
-				<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15" BorderBrush="Black" BorderThickness="0 0 0 1">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="auto" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
+			<StackPanel Orientation="Horizontal" x:Name="AllContentPanel" 
+					Margin="24" BorderBrush="Black" BorderThickness="1">
+				<StackPanel x:Name="CompanyDetailsPanel" Orientation="Vertical" BorderBrush="Black" BorderThickness="0 0 1 0">
+					<TextBlock Text="{Binding Company.Name}" FontSize="48" Margin="20,5"/>
+					<Image Source="{Binding Company.Image}" Height="300" Width="450" />
 
-					<SymbolIcon Width="24" Height="24" Symbol="AlignCenter" Grid.Column="0" Grid.Row="0" Margin="10,5" VerticalAlignment="Top"/>
-					<SymbolIcon Width="24" Height="24" Symbol="Home" Grid.Column="0" Grid.Row="1" Margin="10,2" VerticalAlignment="Top"/>
-					
-					<TextBlock Text="This is a dummy desciption for this event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-						   TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Padding="15,2,5,2" />
-					<TextBlock  Grid.Column="1" Grid.Row="1" Padding="15,2,5,2">
-						<Run Text="{Binding Company.Street}" />
-						<Run Text="," />
-						<Run Text="{Binding Company.ZipCode}" />
-						<Run Text="{Binding Company.City}" />
-					</TextBlock>
-				</Grid>
+					<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15" 
+						  BorderBrush="Black" BorderThickness="0 0 0 1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
 
-				<Grid HorizontalAlignment="Stretch">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<Button Content="Like" Command="{Binding BtnLike}" 
-							HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0"
-							 BorderBrush="Black" BorderThickness="0 0 1 0"/>
-					<Button Content="Facebook" Command="{Binding BtnFacebook}" 
-							HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
-				</Grid>
-			</StackPanel>
+						<SymbolIcon Width="24" Height="24" Symbol="AlignCenter" Grid.Column="0" Grid.Row="0" Margin="10,5" VerticalAlignment="Top"/>
+						<SymbolIcon Width="24" Height="24" Symbol="Home" Grid.Column="0" Grid.Row="1" Margin="10,2" VerticalAlignment="Top"/>
 
+						<TextBlock Text="This is a dummy desciption for this event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+							   TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Padding="15,2,5,2" />
+						<TextBlock  Grid.Column="1" Grid.Row="1" Padding="15,2,5,2">
+							<Run Text="{Binding Company.Street}" />
+							<Run Text="," />
+							<Run Text="{Binding Company.ZipCode}" />
+							<Run Text="{Binding Company.City}" />
+						</TextBlock>
+					</Grid>
 
-			<StackPanel Orientation="Horizontal" x:Name="EventsAndPromotionsPanel">
-				<!-- Events -->
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Events" FontSize="36" Margin="5"/>
-					<ListView ItemsSource="{Binding Events}">
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<Button Command="{Binding CompanyDetail.CmdGoToEventDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_EventID}"
-										Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-									<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
-										<Ellipse Height="64" Width="64" VerticalAlignment="Center">
-											<Ellipse.Fill>
-												<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
-											</Ellipse.Fill>
-										</Ellipse>
-										<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
-											<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
-											<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-											<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-										</StackPanel>
-									</StackPanel>
-								</Button>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-					</ListView>
+					<Grid HorizontalAlignment="Stretch">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Button Content="Like" Command="{Binding BtnLike}" 
+								HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0"
+								 BorderBrush="Black" BorderThickness="0 0 1 0"/>
+						<Button Content="Facebook" Command="{Binding BtnFacebook}" 
+								HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+					</Grid>
 				</StackPanel>
-				<!-- Promotions -->
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Promotions" FontSize="36" Margin="5"/>
-					<ListView ItemsSource="{Binding Promotions}" >
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<Button Command="{Binding CompanyDetail.CmdGoToPromotionDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_PromotionID}"
-										Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-									<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Title}">
-										<Ellipse Height="64" Width="64" VerticalAlignment="Center">
-											<Ellipse.Fill>
-												<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
-											</Ellipse.Fill>
-										</Ellipse>
-										<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
-											<TextBlock Text="{Binding Title}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
-											<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
-											<Run Text="From "/>
-											<Run Text="{Binding Start}" />
-											</TextBlock>
-											<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
-											<Run Text="Until "/>
-											<Run Text="{Binding Expiration}" />
-											</TextBlock>
+
+
+				<StackPanel Orientation="Horizontal" x:Name="EventsAndPromotionsPanel">
+					<!-- Events -->
+					<StackPanel Orientation="Vertical">
+						<TextBlock Text="Events" FontSize="36" Margin="5"/>
+						<ListView ItemsSource="{Binding Events}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<Button Command="{Binding CompanyDetail.CmdGoToEventDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_EventID}"
+											Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+										<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
+											<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+												<Ellipse.Fill>
+													<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+												</Ellipse.Fill>
+											</Ellipse>
+											<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+												<TextBlock Text="{Binding Name}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+												<TextBlock Text="{Binding Date}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+												<TextBlock Text="{Binding Street}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+											</StackPanel>
 										</StackPanel>
-									</StackPanel>
-								</Button>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-					</ListView>
+									</Button>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</StackPanel>
+					<!-- Promotions -->
+					<StackPanel Orientation="Vertical">
+						<TextBlock Text="Promotions" FontSize="36" Margin="5"/>
+						<ListView ItemsSource="{Binding Promotions}" >
+							<ListView.ItemContainerStyle>
+								<Style TargetType="ListViewItem">
+									<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+								</Style>
+							</ListView.ItemContainerStyle>
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<Button Command="{Binding CompanyDetail.CmdGoToPromotionDetail, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding PK_PromotionID}"
+											Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+										<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Title}">
+											<Ellipse Height="64" Width="64" VerticalAlignment="Center">
+												<Ellipse.Fill>
+													<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+												</Ellipse.Fill>
+											</Ellipse>
+											<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
+												<TextBlock Text="{Binding Title}"  Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" />
+												<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+												<Run Text="From "/>
+												<Run Text="{Binding Start}" />
+												</TextBlock>
+												<TextBlock Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}">
+												<Run Text="Until "/>
+												<Run Text="{Binding Expiration}" />
+												</TextBlock>
+											</StackPanel>
+										</StackPanel>
+									</Button>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</StackPanel>
+
 				</StackPanel>
-			
 			</StackPanel>
-		</StackPanel>
+		</ScrollViewer>
 	</RelativePanel>
 </Page>
