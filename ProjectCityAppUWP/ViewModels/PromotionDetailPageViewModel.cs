@@ -29,7 +29,9 @@ namespace ProjectCityAppUWP.ViewModels
         private async void TextToSpeech()
         {
             SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-            SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(Promotion.Description);
+			string str = "Promotion title: " + Promotion.Title + " by " + Company.Name + ". Promotion description: " + 
+				Promotion.Description + ". Start date: " + Promotion.Start + ". Expiration date: " + Promotion.Expiration;
+			SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(str);
             MediaElement audioPlayer = new MediaElement();
             audioPlayer.AutoPlay = true;
             audioPlayer.SetSource(ttsStream, "");
