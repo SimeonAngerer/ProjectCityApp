@@ -25,7 +25,8 @@
 			</TextBlock>
 
 			<Image Source="https://dummyimage.com/450x300/000000/fff.jpg" Height="300" Width="450"/>
-			<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15" >
+			<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15" 
+				  BorderBrush="Black" BorderThickness="0 0 0 1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition />
@@ -53,7 +54,8 @@
 					<Run Text="{Binding Event.City}" />
 				</TextBlock>
 			</Grid>
-
+			<Button Content="Add to calendar" Command="{Binding CmdAddAppointment}"
+					HorizontalAlignment="Stretch"/>
 		</StackPanel>
 
 	</RelativePanel>
