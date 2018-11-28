@@ -58,7 +58,11 @@
 			<StackPanel Orientation="Horizontal" x:Name="AllContentPanel" 
 					Margin="24" BorderBrush="Black" BorderThickness="1">
 				<StackPanel x:Name="CompanyDetailsPanel" Orientation="Vertical" BorderBrush="Black" BorderThickness="0 0 1 0">
-					<TextBlock Text="{Binding Company.Name}" FontSize="48" Margin="20,5" MaxWidth="450" TextWrapping="Wrap"/>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding Company.Name}" FontSize="48" Margin="20,5" MaxWidth="450" TextWrapping="Wrap"/>
+						<Button FontFamily="Segoe MDL2 Assets" FontSize="20" Content="&#xE767;" Command="{Binding BtnTextToSpeech}"/>
+					</StackPanel>
+
 					<Image Source="{Binding Company.Image}" Height="300" Width="450" />
 
 					<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15" 

@@ -9,7 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Notifications;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace ProjectCityAppUWP.ViewModels
@@ -25,16 +27,29 @@ namespace ProjectCityAppUWP.ViewModels
         public ObservableCollection<SharedEvent> Events { get; set; }
         public ObservableCollection<SharedPromotion> Promotions { get; set; }
 
+		public DelegateCommand BtnTextToSpeech { get; set; }
 
-        public CompanyDetailPageViewModel()
+
+		public CompanyDetailPageViewModel()
         {
             BtnFacebook = new DelegateCommand(OpenFacebook);
             BtnLike = new DelegateCommand(LikeCompany);
             CmdGoToEventDetail = new DelegateCommand<Guid>(GoToEventDetail);
             CmdGoToPromotionDetail = new DelegateCommand<Guid>(GoToPromotionDetail);
-        }
+			BtnTextToSpeech = new DelegateCommand(TextToSpeech);
+		}
 
-        private async void LikeCompany()
+		private async void TextToSpeech()
+		{
+			SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+			string str = "Company name: " + Company.Name + ". Address: " + Company.Street + " " + Company.ZipCode + " " + Company.City;
+			SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(str);
+			MediaElement audioPlayer = new MediaElement();
+			audioPlayer.AutoPlay = true;
+			audioPlayer.SetSource(ttsStream, "");
+		}
+
+		private async void LikeCompany()
         {
             string currentUser = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"];
             if (!String.IsNullOrEmpty(currentUser))
