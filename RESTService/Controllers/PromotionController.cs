@@ -21,6 +21,7 @@ namespace RESTService.Controllers
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
+                Image = x.Image,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title
@@ -35,6 +36,7 @@ namespace RESTService.Controllers
                 Description = tempValue.Description,
                 Expiration = tempValue.Expiration,
                 FK_CompanyID = tempValue.FK_CompanyID,
+                Image = tempValue.Image,
                 PK_PromotionID = tempValue.PK_PromotionID,
                 Start = tempValue.Start,
                 Title = tempValue.Title
@@ -48,6 +50,7 @@ namespace RESTService.Controllers
                 Description = value.Description,
                 Expiration = value.Expiration,
                 FK_CompanyID = value.FK_CompanyID,
+                Image = value.Image,
                 PK_PromotionID = value.PK_PromotionID,
                 Start = value.Start,
                 Title = value.Title
@@ -61,6 +64,7 @@ namespace RESTService.Controllers
 
             if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
             if (value.Expiration != DateTime.MinValue) { tempValue.Expiration = value.Expiration; }
+            if (!String.IsNullOrEmpty(value.Image)) { tempValue.Image = value.Image; }
             if (value.Start != DateTime.MinValue) { tempValue.Start = value.Start; }
             if (!String.IsNullOrEmpty(value.Title)) { tempValue.Title = value.Title; }
 
@@ -82,6 +86,7 @@ namespace RESTService.Controllers
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
+                Image = x.Image,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title
@@ -95,6 +100,7 @@ namespace RESTService.Controllers
                 Description = x.Description,
                 Expiration = x.Expiration,
                 FK_CompanyID = x.FK_CompanyID,
+                Image = x.Image,
                 PK_PromotionID = x.PK_PromotionID,
                 Start = x.Start,
                 Title = x.Title
