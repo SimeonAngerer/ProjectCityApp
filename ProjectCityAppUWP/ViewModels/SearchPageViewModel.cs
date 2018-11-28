@@ -43,6 +43,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public async void GetCompanies()
         {
+            Views.Busy.SetBusy(true, "Please wait...");
             if (Companies == null) { Companies = new ObservableCollection<SharedCompany>(); }
             Companies.Clear();
             HttpClient client = new HttpClient();
@@ -53,6 +54,7 @@ namespace ProjectCityAppUWP.ViewModels
                 Companies.Add(item);
             }
             RaisePropertyChanged("Companies");
+            Views.Busy.SetBusy(false);
         }
 
         private void GoToCompanyDetail(Guid guid)
