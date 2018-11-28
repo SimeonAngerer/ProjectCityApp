@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 
 namespace RESTService.Controllers
@@ -131,6 +132,7 @@ namespace RESTService.Controllers
 
         public IEnumerable<SharedCompany> GetCompaniesBySearchString(string searchString)
         {
+            Thread.Sleep(500);
             return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
                 City = x.City,
