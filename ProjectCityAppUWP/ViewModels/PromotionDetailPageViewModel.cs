@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Template10.Mvvm;
+using Windows.Media.SpeechSynthesis;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace ProjectCityAppUWP.ViewModels
@@ -16,17 +18,29 @@ namespace ProjectCityAppUWP.ViewModels
 		public SharedPromotion Promotion { get; set; }
 		public SharedCompany Company { get; set; }
 		public DelegateCommand BtnDiscount { get; set; }
+        public DelegateCommand BtnTextToSpeech { get; set; }
 
-		public PromotionDetailPageViewModel()
+        public PromotionDetailPageViewModel()
         {
 			BtnDiscount = new DelegateCommand(OpenDiscountPdf);
-		}
-		private async void OpenDiscountPdf()
-		{
-			var success = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"));
+            BtnTextToSpeech = new DelegateCommand(TextToSpeech);
 		}
 
-		public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        private async void TextToSpeech()
+        {
+            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+            SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(Promotion.Description);
+            MediaElement audioPlayer = new MediaElement();
+            audioPlayer.AutoPlay = true;
+            audioPlayer.SetSource(ttsStream, "");
+        }
+
+        private async void OpenDiscountPdf()
+		{
+			var success = await Windows.System.Launcher.LaunchUriAsync(new Uri("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"));
+        }
+
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
 		{
 			GetPromotion((Guid)parameter);
 			return base.OnNavigatedToAsync(parameter, mode, state);
