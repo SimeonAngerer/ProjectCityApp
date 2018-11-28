@@ -33,6 +33,7 @@
           <Property Name="PK_EventID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
           <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
@@ -215,6 +216,7 @@
           <Property Name="PK_EventID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -399,6 +401,7 @@
                 <ScalarProperty Name="PK_EventID" ColumnName="PK_EventID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
