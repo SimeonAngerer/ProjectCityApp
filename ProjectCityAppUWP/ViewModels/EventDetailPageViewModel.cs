@@ -6,7 +6,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.Foundation;
+using Windows.Media.SpeechSynthesis;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace ProjectCityAppUWP.ViewModels
@@ -17,15 +19,28 @@ namespace ProjectCityAppUWP.ViewModels
 		public SharedCompany Company { get; set; }
 		public DelegateCommand<Guid> CmdGoToCompanyDetail { get; set; }
         public DelegateCommand CmdAddAppointment { get; set; }
+		public DelegateCommand BtnTextToSpeech { get; set; }
 
 
-        public EventDetailPageViewModel()
+		public EventDetailPageViewModel()
 		{
 			CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);
             CmdAddAppointment = new DelegateCommand(AddAppointment);
+			BtnTextToSpeech = new DelegateCommand(TextToSpeech);
 		}
 
-        private async void AddAppointment()
+		private async void TextToSpeech()
+		{
+			SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+			string str = "Event name: " + Event.Name + " by " + Company.Name + ". Event description: " +
+				Event.Description + ". Date: " + Event.Date + ". Address: " + Event.Street + " " + Event.ZipCode + " " + Event.City + " ";
+			SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(str);
+			MediaElement audioPlayer = new MediaElement();
+			audioPlayer.AutoPlay = true;
+			audioPlayer.SetSource(ttsStream, "");
+		}
+
+		private async void AddAppointment()
         {
             // Create an Appointment that should be added the user's appointments provider app.
             var appointment = new Windows.ApplicationModel.Appointments.Appointment();
