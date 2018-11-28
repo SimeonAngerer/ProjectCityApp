@@ -27,7 +27,7 @@
 				<Run Text="{Binding Company.Name}"/>
 			</TextBlock>
 
-			<Image Source="https://dummyimage.com/450x300/000000/fff.jpg" Height="300" Width="450" />
+			<Image Source="{Binding Promotion.Image}" Height="300" Width="450" />
 			<Grid Width="auto" MaxWidth="450" Height="auto" Padding="15"
 				  BorderBrush="Black" BorderThickness="0 0 0 1">
 				<Grid.ColumnDefinitions>

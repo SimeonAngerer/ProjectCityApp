@@ -111,7 +111,7 @@
 										<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Name}">
 											<Ellipse Height="64" Width="64" VerticalAlignment="Center">
 												<Ellipse.Fill>
-													<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+													<ImageBrush ImageSource="{Binding Image}"/>
 												</Ellipse.Fill>
 											</Ellipse>
 											<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
@@ -141,7 +141,7 @@
 										<StackPanel Orientation="Horizontal" Height="84" AutomationProperties.Name="{Binding Title}">
 											<Ellipse Height="64" Width="64" VerticalAlignment="Center">
 												<Ellipse.Fill>
-													<ImageBrush ImageSource="https://dummyimage.com/64x64/000000/fff.jpg"/>
+													<ImageBrush ImageSource="{Binding Image}"/>
 												</Ellipse.Fill>
 											</Ellipse>
 											<StackPanel Padding="20" Orientation="Vertical" VerticalAlignment="Center">
