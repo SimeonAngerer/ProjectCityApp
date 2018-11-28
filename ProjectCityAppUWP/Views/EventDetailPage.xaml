@@ -18,7 +18,12 @@
 
 		<StackPanel Orientation="Vertical" RelativePanel.Below="pageHeader" Margin="24"
 					BorderBrush="Black" BorderThickness="1">
-			<TextBlock Text="{Binding Event.Name}" FontSize="48" Margin="20,5"/>
+
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding Event.Name}" FontSize="48" Margin="20,5"/>
+				<Button FontFamily="Segoe MDL2 Assets" FontSize="20" Content="&#xE767;" Command="{Binding BtnTextToSpeech}"/>
+			</StackPanel>
+
 			<TextBlock FontSize="32" Margin="50,0,0,15" Foreground="Gray">
 				<Run Text="By"/>
 				<Run Text="{Binding Company.Name}"/>
