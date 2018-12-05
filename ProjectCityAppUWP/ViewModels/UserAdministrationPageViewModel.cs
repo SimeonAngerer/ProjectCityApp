@@ -114,7 +114,7 @@ namespace ProjectCityAppUWP.ViewModels
         public string Image
         {
             get { return image; }
-            set { image = value; }
+            set { image = value; RaisePropertyChanged(); }
         }
 
         private ObservableCollection<SharedEvent> events;
