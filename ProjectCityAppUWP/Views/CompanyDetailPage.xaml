@@ -52,8 +52,8 @@
 
 		<ScrollViewer ZoomMode="Disabled" RelativePanel.Below="pageHeader"
 			IsVerticalScrollChainingEnabled="True"
-			HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible"
-			VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+			HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto"
+			VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto">
 
 			<StackPanel Orientation="Horizontal" x:Name="AllContentPanel" 
 					Margin="24" BorderBrush="Black" BorderThickness="1">
