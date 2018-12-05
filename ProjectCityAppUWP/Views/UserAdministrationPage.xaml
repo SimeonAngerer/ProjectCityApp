@@ -38,7 +38,8 @@
                              RelativePanel.AlignTopWithPanel="True" Text="User Administration">
         </controls:PageHeader>
 
-        <ScrollViewer Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
+        <ScrollViewer Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True"
+                      HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
             <StackPanel Orientation="Horizontal" x:Name="UserCompanyAndEventsPromotionPanel">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>

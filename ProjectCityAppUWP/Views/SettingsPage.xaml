@@ -100,15 +100,6 @@
                                       OnContent="ProjectCityAppUWP Button is visible"
                                       RelativePanel.AlignLeftWithPanel="True"
                                       RelativePanel.Below="UseShellDrawnBackButtonToggleSwtich" />
-
-                        <ToggleSwitch x:Name="IsFullScreenToggleSwitch"
-                                      Header="Page content is Full Screen"
-                                      IsOn="{Binding IsFullScreen, Mode=TwoWay}"
-                                      OffContent="ProjectCityAppUWP Menu is visible"
-                                      OnContent="ProjectCityAppUWP Menu is hidden"
-                                      RelativePanel.AlignLeftWithPanel="True"
-                                      RelativePanel.Below="ShowHamburgerButtonToggleSwitch" />
-
                     </RelativePanel>
 
                 </ScrollViewer>
