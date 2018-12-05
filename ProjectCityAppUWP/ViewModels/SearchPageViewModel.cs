@@ -16,24 +16,24 @@ namespace ProjectCityAppUWP.ViewModels
     {
         public ObservableCollection<SharedCompany> Companies { get; set; }
         public DelegateCommand<Guid> CmdGoToCompanyDetail { get; set; }
-        public DelegateCommand BtnSearch { get; set; }
         private string searchString;
 
         public string SearchString
         {
             get { return searchString; }
-            set { searchString = value; RaisePropertyChanged(); }
+            set { searchString = value; GetCompanies(); RaisePropertyChanged(); }
         }
 
 
         public SearchPageViewModel()
         {
-            BtnSearch = new DelegateCommand(GetCompanies);
             CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);
+            SearchString = String.Empty;
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            if (!String.IsNullOrEmpty(SearchString)) { SearchString = String.Empty; }
             if (mode == NavigationMode.Back)
             {
                 // TODO
@@ -43,18 +43,21 @@ namespace ProjectCityAppUWP.ViewModels
 
         public async void GetCompanies()
         {
-            Views.Busy.SetBusy(true, "Please wait...");
+            //Views.Busy.SetBusy(true, "Please wait...");
             if (Companies == null) { Companies = new ObservableCollection<SharedCompany>(); }
-            Companies.Clear();
             HttpClient client = new HttpClient();
             string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/company?searchString=" + SearchString));
             var list = JsonConvert.DeserializeObject<List<SharedCompany>>(res);
             foreach (var item in list)
             {
-                Companies.Add(item);
+                if (!Companies.Contains(item)) { Companies.Add(item); }
+            }
+            for (int i = Companies.Count - 1; i >= 0; i--)
+            {
+                if (!list.Contains(Companies[i])) { Companies.Remove(Companies[i]); }
             }
             RaisePropertyChanged("Companies");
-            Views.Busy.SetBusy(false);
+            //Views.Busy.SetBusy(false);
         }
 
         private void GoToCompanyDetail(Guid guid)

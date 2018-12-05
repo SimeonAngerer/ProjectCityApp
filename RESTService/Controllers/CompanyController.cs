@@ -132,8 +132,8 @@ namespace RESTService.Controllers
 
         public IEnumerable<SharedCompany> GetCompaniesBySearchString(string searchString)
         {
-            Thread.Sleep(500);
-            return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
+            //Thread.Sleep(500);
+            return model.Companies.Where(x => String.IsNullOrEmpty(searchString) || x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
                 City = x.City,
                 PK_CompanyID = x.PK_CompanyID,

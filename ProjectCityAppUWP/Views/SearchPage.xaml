@@ -17,10 +17,7 @@
                              RelativePanel.AlignTopWithPanel="True" Text="Company Search">
         </controls:PageHeader>
 
-        <StackPanel x:Name="searchControls" RelativePanel.Below="pageHeader" Orientation="Horizontal" Margin="5">
-            <TextBox Width="200" Margin="5" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            <Button Content="Search" Margin="5" Command="{Binding BtnSearch}"/>
-        </StackPanel>
+        <TextBox x:Name="searchControls" RelativePanel.Below="pageHeader" Width="200" Margin="5" Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         <GridView ItemsSource="{Binding Companies}" Margin="5" RelativePanel.Below="searchControls" x:Name="gridView">
             <GridView.ItemTemplate>
                 <DataTemplate>
