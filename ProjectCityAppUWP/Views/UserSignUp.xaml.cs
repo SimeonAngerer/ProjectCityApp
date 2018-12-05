@@ -26,5 +26,10 @@ namespace ProjectCityAppUWP.Views
         {
             this.InitializeComponent();
         }
+
+        private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
