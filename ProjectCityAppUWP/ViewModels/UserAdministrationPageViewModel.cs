@@ -108,6 +108,15 @@ namespace ProjectCityAppUWP.ViewModels
             get { return facebook; }
             set { facebook = value; RaisePropertyChanged(); }
         }
+
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+
         private ObservableCollection<SharedEvent> events;
 
         public ObservableCollection<SharedEvent> Events
@@ -196,7 +205,8 @@ namespace ProjectCityAppUWP.ViewModels
                     Facebook = Facebook,
                     Name = CompanyName,
                     Street = Street,
-                    ZipCode = Postalcode
+                    ZipCode = Postalcode,
+                    Image = Image
                 };
                 myContent = JsonConvert.SerializeObject(tempCompany);
                 buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
@@ -235,6 +245,7 @@ namespace ProjectCityAppUWP.ViewModels
                 Postalcode = company.ZipCode;
                 City = company.City;
                 Facebook = company.Facebook;
+                Image = company.Image;
 
                 // Get the Events
                 temp = await client.GetStringAsync(new Uri("http://localhost:51070/api/Event?companyID=" + user.FK_CompanyID));
