@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.Media.SpeechSynthesis;
 using Windows.UI.Notifications;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -18,6 +19,14 @@ namespace ProjectCityAppUWP.ViewModels
 {
     public class CompanyDetailPageViewModel : ViewModelBase
     {
+        private Visibility visible;
+
+        public Visibility Visible
+        {
+            get { return visible; }
+            set { visible = value; RaisePropertyChanged(); }
+        }
+
         public SharedCompany Company { get; set; }
         public DelegateCommand BtnFacebook { get; set; }
         public DelegateCommand BtnLike { get; set; }
@@ -58,11 +67,11 @@ namespace ProjectCityAppUWP.ViewModels
                 var res = await client.PostAsync(
                     new Uri($"http://localhost:51070/api/Follower?companyGuid={Company.PK_CompanyID}&userId={currentUser}"),
                     null);
+                CreateToast(res);
             }
-            CreateToast();
         }
 
-        private void CreateToast()
+        private void CreateToast(HttpResponseMessage res)
         {
             string title = "You are following...";
             string content = Company.Name;
@@ -114,6 +123,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            Visible = Visibility.Collapsed;
             GetCompany((Guid)parameter);
             GetEvents((Guid)parameter);
             GetPromotions((Guid)parameter);
@@ -142,6 +152,7 @@ namespace ProjectCityAppUWP.ViewModels
                 // item.Command = new DelegateCommand<Guid>(GoToEventDetail);
                 Events.Add(item);
             }
+            if(list.Count > 0) { Visible = Visibility.Visible; }
             RaisePropertyChanged("Events");
         }
 
@@ -158,6 +169,7 @@ namespace ProjectCityAppUWP.ViewModels
                 // item.Command = new DelegateCommand<Guid>(GoToPromotionDetail);
                 Promotions.Add(item);
             }
+            if (list.Count > 0) { Visible = Visibility.Visible; }
             RaisePropertyChanged("Promotions");
         }
 

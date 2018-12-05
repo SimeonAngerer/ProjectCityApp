@@ -103,7 +103,7 @@
 				</StackPanel>
 
 
-				<StackPanel Orientation="Horizontal" x:Name="EventsAndPromotionsPanel">
+                <StackPanel Orientation="Horizontal" x:Name="EventsAndPromotionsPanel" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
 					<!-- Events -->
 					<StackPanel Orientation="Vertical">
 						<TextBlock Text="Events" FontSize="36" Margin="5"/>
