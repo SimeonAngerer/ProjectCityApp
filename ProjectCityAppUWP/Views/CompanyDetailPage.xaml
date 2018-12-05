@@ -79,7 +79,7 @@
 						<SymbolIcon Width="24" Height="24" Symbol="AlignCenter" Grid.Column="0" Grid.Row="0" Margin="10,5" VerticalAlignment="Top"/>
 						<SymbolIcon Width="24" Height="24" Symbol="Home" Grid.Column="0" Grid.Row="1" Margin="10,2" VerticalAlignment="Top"/>
 
-						<TextBlock Text="This is a dummy desciption for this event. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+						<TextBlock Text="{Binding Company.Description}"
 							   TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Padding="15,2,5,2" />
 						<TextBlock  Grid.Column="1" Grid.Row="1" Padding="15,2,5,2">
 							<Run Text="{Binding Company.Street}" />

@@ -26,7 +26,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             }).ToList();
         }
 
@@ -42,7 +43,8 @@ namespace RESTService.Controllers
                 Name = tempValue.Name,
                 PK_CompanyID = tempValue.PK_CompanyID,
                 Street = tempValue.Street,
-                ZipCode = tempValue.Zipcode
+                ZipCode = tempValue.Zipcode,
+                Description = tempValue.Description
             };
         }
         public void Post([FromBody]SharedCompany value)
@@ -56,7 +58,8 @@ namespace RESTService.Controllers
                 Name = value.Name,
                 PK_CompanyID = value.PK_CompanyID,
                 Street = value.Street,
-                Zipcode = value.ZipCode
+                Zipcode = value.ZipCode,
+                Description = value.Description
             });
 
             model.SaveChanges();
@@ -72,6 +75,7 @@ namespace RESTService.Controllers
             if (!String.IsNullOrEmpty(value.Name)) { tempValue.Name = value.Name; }
             if (!String.IsNullOrEmpty(value.Street)) { tempValue.Street = value.Street; }
             if (!String.IsNullOrEmpty(value.ZipCode)) { tempValue.Zipcode = value.ZipCode; }
+            if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
 
             model.SaveChanges();
         }
@@ -95,7 +99,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
             return asdf;
         }
@@ -111,7 +116,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
@@ -126,7 +132,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
@@ -142,7 +149,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
@@ -157,7 +165,8 @@ namespace RESTService.Controllers
                 Name = x.Company.Name,
                 Street = x.Company.Street,
                 ZipCode = x.Company.Zipcode,
-                FK_CategoryID = x.Company.FK_CategoryID
+                FK_CategoryID = x.Company.FK_CategoryID,
+                Description = x.Company.Description
             });
         }
     }
