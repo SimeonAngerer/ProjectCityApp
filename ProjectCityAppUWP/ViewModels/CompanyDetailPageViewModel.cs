@@ -67,13 +67,14 @@ namespace ProjectCityAppUWP.ViewModels
                 var res = await client.PostAsync(
                     new Uri($"http://localhost:51070/api/Follower?companyGuid={Company.PK_CompanyID}&userId={currentUser}"),
                     null);
-                CreateToast(res);
+                string resultContent = await res.Content.ReadAsStringAsync();
+                CreateToast(resultContent);
             }
         }
 
-        private void CreateToast(HttpResponseMessage res)
+        private void CreateToast(string resultContent)
         {
-            string title = "You are following...";
+            string title = resultContent == "true" ? "SUCCESS: You are now following..." : "WARNING: You are already following...";
             string content = Company.Name;
             string image = Company.Image;
             string logo = "ms-appdata:///local/Andrew.jpg";
