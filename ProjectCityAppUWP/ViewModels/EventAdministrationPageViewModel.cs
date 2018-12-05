@@ -83,6 +83,7 @@ namespace ProjectCityAppUWP.ViewModels
 				GetData(eventGuid);
 			} else
 			{
+                PK_EventID = Guid.Empty;
 				Name = "";
 				Date = DateTimeOffset.Now;
 				Street = "";
