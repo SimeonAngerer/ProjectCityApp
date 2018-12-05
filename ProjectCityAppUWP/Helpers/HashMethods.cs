@@ -12,6 +12,7 @@ namespace ProjectCityAppUWP.Helpers
     {
         public static string ComputeMD5(string str)
         {
+            if (String.IsNullOrEmpty(str)) { return String.Empty; }
             var alg = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
             var buff = CryptographicBuffer.ConvertStringToBinary(str, BinaryStringEncoding.Utf8);
             var hashed = alg.HashData(buff);

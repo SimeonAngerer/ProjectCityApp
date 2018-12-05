@@ -19,6 +19,7 @@ namespace ProjectCityAppUWP.ViewModels
 
         public MainPageViewModel()
         {
+            Companies = new ObservableCollection<SharedCompany>();
         }
 
         public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -27,6 +28,10 @@ namespace ProjectCityAppUWP.ViewModels
             if (!String.IsNullOrEmpty(currentUser))
             {
                 GetCompanies(Guid.Parse(currentUser));
+            }
+            else
+            {
+                Companies.Clear();
             }
             CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);
             return base.OnNavigatedToAsync(parameter, mode, state);

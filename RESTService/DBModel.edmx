@@ -10,7 +10,7 @@
             <PropertyRef Name="PK_CategoryID" />
           </Key>
           <Property Name="PK_CategoryID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Company">
@@ -18,11 +18,12 @@
             <PropertyRef Name="PK_CompanyID" />
           </Key>
           <Property Name="PK_CompanyID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" />
-          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Street" Type="varchar(max)" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar(max)" Nullable="false" />
+          <Property Name="City" Type="varchar(max)" Nullable="false" />
           <Property Name="Facebook" Type="varchar(max)" />
           <Property Name="FK_CategoryID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -31,12 +32,13 @@
             <PropertyRef Name="PK_EventID" />
           </Key>
           <Property Name="PK_EventID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
           <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Street" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street" Type="varchar(max)" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar(max)" Nullable="false" />
+          <Property Name="City" Type="varchar(max)" Nullable="false" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Follower">
@@ -52,7 +54,7 @@
             <PropertyRef Name="PK_PromotionID" />
           </Key>
           <Property Name="PK_PromotionID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" Nullable="false" />
           <Property Name="Image" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Start" Type="datetime2" Precision="7" Nullable="false" />
@@ -64,12 +66,12 @@
             <PropertyRef Name="PK_UserID" />
           </Key>
           <Property Name="PK_UserID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="varchar(max)" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar(max)" />
           <Property Name="FK_CompanyID" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_Company_Category">
@@ -186,7 +188,7 @@
             <PropertyRef Name="PK_CategoryID" />
           </Key>
           <Property Name="PK_CategoryID" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Companies" Relationship="Self.FK_Company_Category" FromRole="Category" ToRole="Company" />
         </EntityType>
@@ -195,11 +197,12 @@
             <PropertyRef Name="PK_CompanyID" />
           </Key>
           <Property Name="PK_CompanyID" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_CategoryID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Company_Category" FromRole="Company" ToRole="Category" />
@@ -213,12 +216,13 @@
             <PropertyRef Name="PK_EventID" />
           </Key>
           <Property Name="PK_EventID" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FK_CompanyID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Event_Company" FromRole="Event" ToRole="Company" />
         </EntityType>
@@ -237,7 +241,7 @@
             <PropertyRef Name="PK_PromotionID" />
           </Key>
           <Property Name="PK_PromotionID" Type="Guid" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="7" />
@@ -250,12 +254,12 @@
             <PropertyRef Name="PK_UserID" />
           </Key>
           <Property Name="PK_UserID" Type="Guid" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_CompanyID" Type="Guid" />
           <NavigationProperty Name="Company" Relationship="Self.FK_User_Company" FromRole="User" ToRole="Company" />
           <NavigationProperty Name="Followers" Relationship="Self.FK_Follower_User" FromRole="User" ToRole="Follower" />
@@ -385,6 +389,7 @@
                 <ScalarProperty Name="PK_CompanyID" ColumnName="PK_CompanyID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -399,6 +404,7 @@
                 <ScalarProperty Name="PK_EventID" ColumnName="PK_EventID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />

@@ -20,7 +20,9 @@ namespace RESTService.Controllers
             {
                 City = x.City,
                 Date = x.Date,
+                Description = x.Description,
                 FK_CompanyID = x.FK_CompanyID,
+                Image = x.Image,
                 Name = x.Name,
                 PK_EventID = x.PK_EventID,
                 Street = x.Street,
@@ -35,7 +37,9 @@ namespace RESTService.Controllers
 			{
 				City = tempValue.City,
 				Date = tempValue.Date,
+                Description = tempValue.Description,
 				FK_CompanyID = tempValue.FK_CompanyID,
+                Image = tempValue.Image,
 				Name = tempValue.Name,
 				PK_EventID = tempValue.PK_EventID,
 				Street = tempValue.Street,
@@ -49,7 +53,9 @@ namespace RESTService.Controllers
             {
                 City = value.City,
                 Date = value.Date,
+                Description = value.Description,
                 FK_CompanyID = value.FK_CompanyID,
+                Image = value.Image,
                 Name = value.Name,
                 PK_EventID = value.PK_EventID,
                 Street = value.Street,
@@ -64,6 +70,8 @@ namespace RESTService.Controllers
 
             if (!String.IsNullOrEmpty(value.City)) { tempValue.City = value.City; }
             if (value.Date != DateTime.MinValue) { tempValue.Date = value.Date; }
+            if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
+            if (!String.IsNullOrEmpty(value.Image)) { tempValue.Image = value.Image; }
             if (!String.IsNullOrEmpty(value.Name)) { tempValue.Name = value.Name; }
             if (!String.IsNullOrEmpty(value.Street)) { tempValue.Street = value.Street; }
             if (!String.IsNullOrEmpty(value.ZipCode)) { tempValue.Zipcode = value.ZipCode; }
@@ -85,6 +93,9 @@ namespace RESTService.Controllers
             {
                 City = x.City,
                 Date = x.Date,
+                Description = x.Description,
+                FK_CompanyID = x.FK_CompanyID,
+                Image = x.Image,
                 PK_EventID = x.PK_EventID,
                 Name = x.Name,
                 Street = x.Street,

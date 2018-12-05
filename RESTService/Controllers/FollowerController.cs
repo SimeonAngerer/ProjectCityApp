@@ -47,15 +47,23 @@ namespace RESTService.Controllers
 
         #endregion
 
-        public void Follow(Guid companyGuid, Guid userId)
+        public bool Follow(Guid companyGuid, Guid userId)
         {
-            model.Followers.Add(new Follower()
+            if (model.Followers.Count(x => x.FK_CompanyID == companyGuid && x.FK_UserID == userId) == 0)
             {
-                FK_CompanyID = companyGuid,
-                FK_UserID = userId,
-                PK_FollowerID = Guid.NewGuid()
-            });
-            model.SaveChanges();
+                model.Followers.Add(new Follower()
+                {
+                    FK_CompanyID = companyGuid,
+                    FK_UserID = userId,
+                    PK_FollowerID = Guid.NewGuid()
+                });
+                model.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 
 namespace RESTService.Controllers
@@ -25,7 +26,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             }).ToList();
         }
 
@@ -41,7 +43,8 @@ namespace RESTService.Controllers
                 Name = tempValue.Name,
                 PK_CompanyID = tempValue.PK_CompanyID,
                 Street = tempValue.Street,
-                ZipCode = tempValue.Zipcode
+                ZipCode = tempValue.Zipcode,
+                Description = tempValue.Description
             };
         }
         public void Post([FromBody]SharedCompany value)
@@ -55,7 +58,8 @@ namespace RESTService.Controllers
                 Name = value.Name,
                 PK_CompanyID = value.PK_CompanyID,
                 Street = value.Street,
-                Zipcode = value.ZipCode
+                Zipcode = value.ZipCode,
+                Description = value.Description
             });
 
             model.SaveChanges();
@@ -71,6 +75,7 @@ namespace RESTService.Controllers
             if (!String.IsNullOrEmpty(value.Name)) { tempValue.Name = value.Name; }
             if (!String.IsNullOrEmpty(value.Street)) { tempValue.Street = value.Street; }
             if (!String.IsNullOrEmpty(value.ZipCode)) { tempValue.Zipcode = value.ZipCode; }
+            if (!String.IsNullOrEmpty(value.Description)) { tempValue.Description = value.Description; }
 
             model.SaveChanges();
         }
@@ -94,7 +99,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
             return asdf;
         }
@@ -110,7 +116,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
@@ -125,13 +132,15 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
         public IEnumerable<SharedCompany> GetCompaniesBySearchString(string searchString)
         {
-            return model.Companies.Where(x => x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
+            //Thread.Sleep(500);
+            return model.Companies.Where(x => String.IsNullOrEmpty(searchString) || x.Name.Contains(searchString) || x.Street.Contains(searchString) || x.City.Contains(searchString)).Select(x => new SharedCompany()
             {
                 City = x.City,
                 PK_CompanyID = x.PK_CompanyID,
@@ -140,7 +149,8 @@ namespace RESTService.Controllers
                 Name = x.Name,
                 Street = x.Street,
                 ZipCode = x.Zipcode,
-                FK_CategoryID = x.FK_CategoryID
+                FK_CategoryID = x.FK_CategoryID,
+                Description = x.Description
             });
         }
 
@@ -155,7 +165,8 @@ namespace RESTService.Controllers
                 Name = x.Company.Name,
                 Street = x.Company.Street,
                 ZipCode = x.Company.Zipcode,
-                FK_CategoryID = x.Company.FK_CategoryID
+                FK_CategoryID = x.Company.FK_CategoryID,
+                Description = x.Company.Description
             });
         }
     }
