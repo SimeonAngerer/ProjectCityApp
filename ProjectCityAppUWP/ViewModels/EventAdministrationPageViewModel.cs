@@ -68,11 +68,21 @@ namespace ProjectCityAppUWP.ViewModels
 		#endregion Properties
 
 		public DelegateCommand BtnUpdate { get; set; }
+		public DelegateCommand BtnDelete { get; set; }
+
+		private string editType;
+		public string EditType
+		{
+			get { return editType; }
+			set { editType = value; RaisePropertyChanged(); }
+		}
 
 
 		public EventAdministrationPageViewModel()
 		{
 			BtnUpdate = new DelegateCommand(Update);
+			BtnDelete = new DelegateCommand(Delete);
+			EditType = "Edit event";
 		}
 
 		public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -80,9 +90,11 @@ namespace ProjectCityAppUWP.ViewModels
 			Guid eventGuid = (Guid)parameter;           // Here you get the guid of the current event; Guid.Empty if it is a new event
 			if (eventGuid != Guid.Empty)
 			{
+				EditType = "Edit event";
 				GetData(eventGuid);
 			} else
 			{
+				EditType = "New event";
 				Name = "";
 				Date = DateTimeOffset.Now;
 				Street = "";
@@ -150,9 +162,18 @@ namespace ProjectCityAppUWP.ViewModels
 				var result = await client.PutAsync(new Uri("http://localhost:51070/api/Event/" + PK_EventID), byteContent);
 			}
 
-			
+			NavigationService.Navigate(typeof(Views.UserAdministrationPage));
+		}
 
+		private async void Delete()
+		{
+			if (PK_EventID != Guid.Empty)
+			{
+				HttpClient client = new HttpClient();
+				await client.DeleteAsync(new Uri("http://localhost:51070/api/Event/" + PK_EventID));
+			}
 			NavigationService.Navigate(typeof(Views.UserAdministrationPage));
 		}
 	}
 }
+
