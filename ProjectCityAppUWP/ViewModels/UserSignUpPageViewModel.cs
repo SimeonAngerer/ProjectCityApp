@@ -137,30 +137,38 @@ namespace ProjectCityAppUWP.ViewModels
         public async void GetCategories()
         {
             HttpClient client = new HttpClient();
-            string res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Category"));
-            Categories = new ObservableCollection<SharedCategory>();
-            var tempList = JsonConvert.DeserializeObject<List<SharedCategory>>(res);
-            foreach (var item in tempList)
+            string res = "";
+                res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Category"));
+            categories = new ObservableCollection<SharedCategory>();
+            foreach (var item in JsonConvert.DeserializeObject<List<SharedCategory>>(res))
             {
-                Categories.Add(item);
+                categories.Add(item);
             }
             RaisePropertyChanged("Categories");
         }
+        private ObservableCollection<SharedCategory> categories = new ObservableCollection<SharedCategory>();
         public ObservableCollection<SharedCategory> Categories
         {
-            get; set;
+            get
+            {
+                if (categories.Count == 0)
+                {
+                    GetCategories();
+                }
+                return categories;
+            }
         }
-        private string password;
         public string Password
         {
             get { return user.Password; }
             set { user.Password = value; RaisePropertyChanged(); }
         }
 
+        private string passwordConfirm;
         public string PasswordConfirm
         {
-            get { return password; }
-            set { password = value; RaisePropertyChanged(); }
+            get { return passwordConfirm; }
+            set { passwordConfirm = value; RaisePropertyChanged(); }
         }
 
         private bool entrepreneur;
@@ -176,6 +184,7 @@ namespace ProjectCityAppUWP.ViewModels
             }
         }
 
+       
         public DateTime Birthday
         {
             get { return user.DateOfBirth; }
@@ -242,14 +251,20 @@ namespace ProjectCityAppUWP.ViewModels
 
         public string CompanyFacebook
         {
-            get; set;
+            get { return this.company.Facebook; }
+            set { this.company.Facebook = value; RaisePropertyChanged(); }
+        }
+
+        public string CompanyDescription
+        {
+            get { return this.company.Description; }
+            set { this.company.Description = value; RaisePropertyChanged();}
         }
 
         public DelegateCommand BtnSignUp { get; set; }
 
         public UserSignUpPageViewModel()
         {
-
             GetCategories();
             Customer = true;
             BtnSignUp = new DelegateCommand(SignUp);
@@ -315,9 +330,6 @@ namespace ProjectCityAppUWP.ViewModels
             {
                 user.PK_UserID = Guid.NewGuid();
                 HttpClient client = new HttpClient();
-                var myContent = JsonConvert.SerializeObject(user);
-                var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-                var byteContent = new ByteArrayContent(buffer);
                 //HttpContent content = new StringContent(JsonConvert.SerializeObject(user));
                 if (!this.entrepreneur)
                 {
@@ -327,11 +339,14 @@ namespace ProjectCityAppUWP.ViewModels
                 {
                     company.PK_CompanyID = Guid.NewGuid();
                     user.FK_CompanyID = company.PK_CompanyID;
-                    myContent = JsonConvert.SerializeObject(company);
-                    buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-                    byteContent = new ByteArrayContent(buffer);
-                    var companylocal = await client.PostAsync(new Uri("http://localhost:51070/api/Company/"), byteContent);
+                    var myContentCompany = JsonConvert.SerializeObject(company);
+                    var bufferCompany = System.Text.Encoding.UTF8.GetBytes(myContentCompany);
+                    var byteContentCompany = new ByteArrayContent(bufferCompany);
+                    var companylocal = await client.PostAsync(new Uri("http://localhost:51070/api/Company/"), byteContentCompany);
                 }
+                var myContent = JsonConvert.SerializeObject(user);
+                var buffer = Encoding.UTF8.GetBytes(myContent);
+                var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"), byteContent);
                 if (user != null)
