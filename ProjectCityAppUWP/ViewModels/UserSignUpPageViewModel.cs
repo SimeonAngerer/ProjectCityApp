@@ -86,6 +86,14 @@ namespace ProjectCityAppUWP.ViewModels
             get { return _formcontrol10; }
             set { _formcontrol10 = value; RaisePropertyChanged(); }
         }
+
+        private SolidColorBrush _formcontrol11 = new SolidColorBrush() { Color = Colors.DarkGray };
+        public SolidColorBrush FormControl11
+        {
+            get { return _formcontrol11; }
+            set { _formcontrol11 = value; RaisePropertyChanged(); }
+        }
+
         private SolidColorBrush _formcontrol12 = new SolidColorBrush() { Color = Colors.DarkGray };
         public SolidColorBrush FormControl12
         {
@@ -104,6 +112,7 @@ namespace ProjectCityAppUWP.ViewModels
             get { return _formcontrol14; }
             set { _formcontrol14 = value; RaisePropertyChanged(); }
         }
+       
 
         public string Firstname
         {
@@ -184,11 +193,15 @@ namespace ProjectCityAppUWP.ViewModels
             }
         }
 
-       
-        public DateTime Birthday
+
+        public DateTimeOffset Birthday
         {
-            get { return user.DateOfBirth; }
-            set { user.DateOfBirth = value; RaisePropertyChanged(); }
+            get
+            {
+                DateTimeOffset dto = DateTime.SpecifyKind(user.DateOfBirth, DateTimeKind.Utc);
+                return dto;
+            }
+            set { user.DateOfBirth = value.Date; RaisePropertyChanged(); }
         }
 
         public bool Customer
@@ -212,7 +225,7 @@ namespace ProjectCityAppUWP.ViewModels
        
         public string CompanyStreet
         {
-            get { return this.company.Name; }
+            get { return this.company.Street; }
             set { this.company.Street = value; RaisePropertyChanged(); }
         }
 
@@ -228,12 +241,6 @@ namespace ProjectCityAppUWP.ViewModels
             set { this.company.City = value; }
         }
 
-        private SolidColorBrush _formcontrol11 = new SolidColorBrush() { Color = Colors.DarkGray };
-        public SolidColorBrush FormControl11
-        {
-            get { return _formcontrol11; }
-            set { _formcontrol11 = value; RaisePropertyChanged(); }
-        }
         public SharedCategory CompanyCategory
         {
             get
@@ -299,36 +306,39 @@ namespace ProjectCityAppUWP.ViewModels
             {
                 list.Add(this.CompanyName != null && this.CompanyName?.Length > 0);//7
                 list.Add(this.CompanyStreet != null && this.CompanyStreet?.Length > 0); //8
-                list.Add(this.CompanyCity != null && this.CompanyCity?.Length > 0); //9
-                list.Add(this.CompanyZipcode != null && this.CompanyZipcode?.Length > 0); //10
+                list.Add(this.CompanyZipcode != null && this.CompanyZipcode?.Length > 0); //9
+                list.Add(this.CompanyCity != null && this.CompanyCity?.Length > 0); //10
                 list.Add(this.SelectedComboIndex != -1); //11
-                list.Add(this.CompanyImage != null && this.CompanyImage.Length > 0); //12
-                list.Add(this.CompanyFacebook != null && this.CompanyFacebook.Length > 0); //13
+                list.Add(this.CompanyFacebook != null && this.CompanyFacebook.Length > 0); //12
+                list.Add(this.CompanyImage != null && this.CompanyImage.Length > 0); //13
+                list.Add(this.CompanyDescription != null && this.CompanyDescription.Length > 0); //14
             }
             FormControl = list;
             if (FormControl.Count > 0)
             {
-                FormControl1 = _formcontrol.ElementAt(0) ? green : red;
-                FormControl2 = _formcontrol.ElementAt(1) ? green : red;
-                FormControl3 = _formcontrol.ElementAt(2) ? green : red;
-                FormControl4 = _formcontrol.ElementAt(3) ? green : red;
-                FormControl5 = _formcontrol.ElementAt(4) ? green : red;
-                FormControl6 = _formcontrol.ElementAt(5) ? green : red;
+                FormControl1 = _formcontrol.ElementAt(0) ? green : red;//1
+                FormControl2 = _formcontrol.ElementAt(1) ? green : red;//2
+                FormControl3 = _formcontrol.ElementAt(2) ? green : red;//3
+                FormControl4 = _formcontrol.ElementAt(3) ? green : red;//4
+                FormControl5 = _formcontrol.ElementAt(4) ? green : red;//5
+                FormControl6 = _formcontrol.ElementAt(5) ? green : red;//6
                 if (this.Entrepreneur)
                 {
-                    FormControl7 = _formcontrol.ElementAt(6) ? green : red;
-                    FormControl8 = _formcontrol.ElementAt(7) ? green : red;
-                    FormControl9 = _formcontrol.ElementAt(8) ? green : red;
-                    FormControl10 = _formcontrol.ElementAt(9) ? green : red;
-                    FormControl11 = _formcontrol.ElementAt(10) ? green : red;
-                    FormControl12 = _formcontrol.ElementAt(11) ? green : red;
-                    FormControl13 = _formcontrol.ElementAt(12) ? green : red;
+                    FormControl7 = _formcontrol.ElementAt(6) ? green : red;//7
+                    FormControl8 = _formcontrol.ElementAt(7) ? green : red;//8
+                    FormControl9 = _formcontrol.ElementAt(8) ? green : red;//9
+                    FormControl10 = _formcontrol.ElementAt(9) ? green : red;//10
+                    FormControl11 = _formcontrol.ElementAt(10) ? green : red;//11
+                    FormControl12 = _formcontrol.ElementAt(11) ? green : red;//12
+                    FormControl13 = _formcontrol.ElementAt(12) ? green : red;//13
+                    FormControl14 = _formcontrol.ElementAt(13) ? green : red;//14
                 }
             }
 
             if (FormControl.All(fc => fc))
             {
                 user.PK_UserID = Guid.NewGuid();
+                user.Password = HashMethods.ComputeMD5(user.Password);
                 HttpClient client = new HttpClient();
                 //HttpContent content = new StringContent(JsonConvert.SerializeObject(user));
                 if (!this.entrepreneur)
@@ -338,17 +348,20 @@ namespace ProjectCityAppUWP.ViewModels
                 else
                 {
                     company.PK_CompanyID = Guid.NewGuid();
+                    company.FK_CategoryID = CompanyCategory.PK_CategoryID;
                     user.FK_CompanyID = company.PK_CompanyID;
+                    user.Type = "Entrepreneur";
                     var myContentCompany = JsonConvert.SerializeObject(company);
-                    var bufferCompany = System.Text.Encoding.UTF8.GetBytes(myContentCompany);
+                    var bufferCompany = Encoding.UTF8.GetBytes(myContentCompany);
                     var byteContentCompany = new ByteArrayContent(bufferCompany);
+                    byteContentCompany.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                     var companylocal = await client.PostAsync(new Uri("http://localhost:51070/api/Company/"), byteContentCompany);
                 }
                 var myContent = JsonConvert.SerializeObject(user);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var currentuser = await client.PostAsync(new Uri("http://localhost:51070/api/User/"), byteContent);
+                await client.PostAsync(new Uri("http://localhost:51070/api/User/"), byteContent);
                 if (user != null)
                 {
                     NavigationService.Navigate(typeof(Views.UserSignIn));
