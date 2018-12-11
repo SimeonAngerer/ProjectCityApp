@@ -94,6 +94,7 @@ namespace ProjectCityAppUWP.ViewModels
 				GetData(eventGuid);
 			} else
 			{
+                PK_EventID = Guid.Empty;
 				EditType = "New event";
 				Name = "";
 				Date = DateTimeOffset.Now;

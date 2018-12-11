@@ -81,6 +81,7 @@ namespace ProjectCityAppUWP.ViewModels
             }
             else
             {
+                PK_PromotionID = Guid.Empty;
                 EditType = "New Promotion";
                 Title = "";
                 Start = DateTimeOffset.Now;
