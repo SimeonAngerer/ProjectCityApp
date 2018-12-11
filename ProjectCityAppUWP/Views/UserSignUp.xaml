@@ -15,7 +15,8 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.AlignTopWithPanel="True" Text="Sign Up">
         </controls:PageHeader>
-        <ScrollViewer  Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
+        <ScrollViewer  Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" 
+                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" >
             <Grid RelativePanel.Below="pageHeader">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -44,19 +45,19 @@
                 <TextBlock FontWeight="Bold" Foreground="White"  Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" FontSize="30" VerticalAlignment="Top" Text="Sign Up" HorizontalTextAlignment="Center" Margin="0,10,0,20" HorizontalAlignment="Stretch"></TextBlock>
                 <!--1 username-->
                 <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Username:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox BorderBrush="{Binding FormControl3}" x:Name="UsernameTb" Grid.Row="1" Grid.Column="1" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox BorderBrush="{Binding FormControl3}" x:Name="UsernameTb" Grid.Row="1" Grid.Column="1" Width="250" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!--2 firstname-->
                 <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Firstname:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl1}" x:Name="FirstnameTb" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Firstname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl1}" x:Name="FirstnameTb" Grid.Row="2" Grid.Column="1" Width="250" VerticalAlignment="Center" Text="{Binding Firstname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
                 <!--3 lastname-->
                 <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Lastname:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl2}" x:Name="LastnameTb" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Lastname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl2}" x:Name="LastnameTb" Grid.Row="3" Grid.Column="1" Width="250" VerticalAlignment="Center" Text="{Binding Lastname,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!--4 password-->
                 <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <PasswordBox  BorderBrush="{Binding FormControl4}" x:Name="PasswordB" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
+                <PasswordBox  BorderBrush="{Binding FormControl4}" x:Name="PasswordB" Grid.Row="4" Grid.Column="1" Width="250" VerticalAlignment="Center" Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Stretch" />
                 <!--5 password repeat-->
                 <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Repeat Password:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <PasswordBox  BorderBrush="{Binding FormControl5}" x:Name="PasswordConfirmB" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Password="{Binding PasswordConfirm,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <PasswordBox  BorderBrush="{Binding FormControl5}" x:Name="PasswordConfirmB" Grid.Row="5" Grid.Column="1" Width="250" VerticalAlignment="Center" Password="{Binding PasswordConfirm,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!--6 dob-->
                 <StackPanel BorderBrush="{Binding FormControl6}" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
                     <DatePicker x:Name="BirthdayB" Header="Date of Birth:" HorizontalAlignment="Stretch" Margin="5" Height="Auto" Date="{Binding Birthday,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
@@ -69,29 +70,29 @@
                 </StackPanel>
                 <!-- 7 company name-->
                 <TextBlock Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Text="Company name:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox BorderBrush="{Binding FormControl7}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="CompanyNameTb" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox BorderBrush="{Binding FormControl7}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="CompanyNameTb" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 8 company street-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Text="Street:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl8}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Street" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyStreet,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl8}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="Street" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyStreet,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 9 company postalcode-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Text="Postalcode:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl9}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="PostalCode" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyZipcode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl9}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="PostalCode" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyZipcode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 10 company city-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Text="City:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl10}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="City" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl10}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="City" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyCity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 11 company category-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="13" Grid.Column="0" VerticalAlignment="Center" Text="Category:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <ComboBox BorderBrush="{Binding FormControl11}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Category" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" PlaceholderText="Pick a category" Margin="5" SelectedIndex="{Binding SelectedComboIndex, Mode=TwoWay}" ItemsSource="{Binding Categories}" HorizontalAlignment="Stretch">
+                <ComboBox BorderBrush="{Binding FormControl11}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="Category" Grid.Row="13" Grid.Column="1" VerticalAlignment="Center" PlaceholderText="Pick a category" Margin="5" SelectedIndex="{Binding SelectedComboIndex, Mode=TwoWay}" ItemsSource="{Binding Categories}" HorizontalAlignment="Stretch">
                 </ComboBox>
                 <!-- 12 company facebook-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="14" Grid.Column="0" VerticalAlignment="Center" Text="Facebook page:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox  BorderBrush="{Binding FormControl12}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" x:Name="FacebookTb" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyFacebook,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox  BorderBrush="{Binding FormControl12}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="FacebookTb" Grid.Row="14" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyFacebook,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 13 company image-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="15" Grid.Column="0" VerticalAlignment="Center" Text="Company Logo url:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox BorderBrush="{Binding FormControl13}" Visibility="{Binding Visible,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="ImageTb" Grid.Row="15" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyImage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox BorderBrush="{Binding FormControl13}" Visibility="{Binding Visible,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="ImageTb" Grid.Row="15" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyImage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <!-- 14 company description-->
                 <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="16" Grid.Column="0" VerticalAlignment="Center" Text="Description" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                <TextBox BorderBrush="{Binding FormControl14}" Visibility="{Binding Visible,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="Description" Grid.Row="16" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
+                <TextBox BorderBrush="{Binding FormControl14}" Visibility="{Binding Visible,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="Description" Grid.Row="16" Grid.Column="1" VerticalAlignment="Center" Text="{Binding CompanyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                 <Button Grid.Row="17" Margin="0,7,-0.5,0" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding BtnSignUp}" Content="Sign Up" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.RowSpan="2" />
                 
                 
