@@ -51,7 +51,7 @@ namespace ProjectCityAppUWP.ViewModels
 		private async void TextToSpeech()
 		{
 			SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-            string description = Company.Description.Trim() == "" ? "No description" : Company.Description;
+            string description = Company.Description==null||Company.Description.Trim() == "" ? "No description" : Company.Description;
 			string str = "Company name: " + Company.Name + ".. description: "+ description +". Address: " + Company.Street + " " + Company.ZipCode + " " + Company.City;
 			SpeechSynthesisStream ttsStream = await synthesizer.SynthesizeTextToStreamAsync(str);
 			MediaElement audioPlayer = new MediaElement();

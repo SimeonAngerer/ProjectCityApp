@@ -80,8 +80,15 @@ namespace ProjectCityAppUWP.ViewModels
             get { return companyName; }
             set { companyName = value; RaisePropertyChanged(); }
         }
-        private string street;
 
+        private string description;
+        public string Description
+        {
+            get { return description; }
+            set { description = value; RaisePropertyChanged(); }
+        }
+
+        private string street;
         public string Street
         {
             get { return street; }
@@ -202,6 +209,7 @@ namespace ProjectCityAppUWP.ViewModels
                 SharedCompany tempCompany = new SharedCompany()
                 {
                     City = City,
+                    Description = Description,
                     Facebook = Facebook,
                     Name = CompanyName,
                     Street = Street,
