@@ -16,7 +16,8 @@
                              RelativePanel.AlignTopWithPanel="True" Text="Event Administration">
         </controls:PageHeader>
 		<ScrollViewer  Background="LightSteelBlue" Padding="20" RelativePanel.Below="pageHeader" 
-					   RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" >
+					   RelativePanel.AlignHorizontalCenterWithPanel="True"  RelativePanel.AlignBottomWithPanel="True" 
+                       HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden" >
 
 			<Grid RelativePanel.Below="pageHeader">
 				<Grid.ColumnDefinitions>

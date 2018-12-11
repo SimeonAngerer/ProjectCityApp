@@ -364,7 +364,8 @@ namespace ProjectCityAppUWP.ViewModels
                 await client.PostAsync(new Uri("http://localhost:51070/api/User/"), byteContent);
                 if (user != null)
                 {
-                    NavigationService.Navigate(typeof(Views.UserSignIn));
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"] = user.PK_UserID.ToString();
+                    NavigationService.Navigate(typeof(Views.MainPage));
                     // TODO Inform Shell, currently it's a workaround
                 }
             }

@@ -16,6 +16,14 @@ namespace ProjectCityAppUWP.ViewModels
     {
         public ObservableCollection<SharedCompany> Companies { get; set; }
         public DelegateCommand<Guid> CmdGoToCompanyDetail { get; set; }
+        private string title;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; RaisePropertyChanged(); }
+        }
+
 
         public MainPageViewModel()
         {
@@ -27,10 +35,12 @@ namespace ProjectCityAppUWP.ViewModels
             string currentUser = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["CurrentUser"];
             if (!String.IsNullOrEmpty(currentUser))
             {
+                Title = "Favourites";
                 GetCompanies(Guid.Parse(currentUser));
             }
             else
             {
+                Title = "Please log in to see your favourites";
                 Companies.Clear();
             }
             CmdGoToCompanyDetail = new DelegateCommand<Guid>(GoToCompanyDetail);

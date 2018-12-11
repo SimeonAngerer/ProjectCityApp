@@ -69,13 +69,20 @@ namespace ProjectCityAppUWP.ViewModels
                     new Uri($"http://localhost:51070/api/Follower?companyGuid={Company.PK_CompanyID}&userId={currentUser}"),
                     null);
                 string resultContent = await res.Content.ReadAsStringAsync();
-                CreateToast(resultContent);
+                if(resultContent == "true")
+                {
+                    CreateToast("SUCCESS: You are now following...");
+                }
+                else
+                {
+                    CreateToast("WARNING: You are already following...");
+                }
             }
+            CreateToast("ERROR: You are not logged in!");
         }
 
-        private void CreateToast(string resultContent)
+        private void CreateToast(string title)
         {
-            string title = resultContent == "true" ? "SUCCESS: You are now following..." : "WARNING: You are already following...";
             string content = Company.Name;
             string image = Company.Image;
             string logo = "ms-appdata:///local/Andrew.jpg";
@@ -114,8 +121,15 @@ namespace ProjectCityAppUWP.ViewModels
                 Visual = visual
             };
 
-            var toast = new ToastNotification(toastContent.GetXml());
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
+            try
+            {
+                var toast = new ToastNotification(toastContent.GetXml());
+                ToastNotificationManager.CreateToastNotifier().Show(toast);
+            }
+            catch (Exception)
+            {
+                // Do nothing
+            }
         }
 
         private async void OpenFacebook()
