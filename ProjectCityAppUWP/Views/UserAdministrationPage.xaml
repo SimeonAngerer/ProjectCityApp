@@ -99,7 +99,7 @@
                     <TextBox  BorderBrush="{Binding FormControl10}" Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="City" Grid.Row="10" Grid.Column="1" VerticalAlignment="Center" Text="{Binding City,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="5" HorizontalAlignment="Stretch" />
                     <!-- 11 company category-->
                     <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Grid.Column="0" VerticalAlignment="Center" Text="Category:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
-                    <ComboBox Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="Category" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" PlaceholderText="Chage the category" Margin="5" SelectedIndex="{Binding SelectedComboIndex, Mode=TwoWay}" ItemsSource="{Binding Categories}" HorizontalAlignment="Stretch">
+                    <ComboBox Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Width="250" x:Name="Category" Grid.Row="11" Grid.Column="1" VerticalAlignment="Center" PlaceholderText="Change the category" Margin="5" SelectedIndex="{Binding SelectedComboIndex, Mode=TwoWay}" ItemsSource="{Binding Categories}" HorizontalAlignment="Stretch">
                     </ComboBox>
                     <!-- 12 company facebook-->
                     <TextBlock  Visibility="{Binding Visible,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="12" Grid.Column="0" VerticalAlignment="Center" Text="Facebook page:" Width="200" Margin="5" HorizontalAlignment="Stretch" />
