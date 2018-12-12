@@ -78,7 +78,10 @@ namespace ProjectCityAppUWP.ViewModels
                     CreateToast("WARNING: You are already following...");
                 }
             }
-            CreateToast("ERROR: You are not logged in!");
+            else
+            {
+                CreateToast("ERROR: You are not logged in!");
+            }
         }
 
         private void CreateToast(string title)
