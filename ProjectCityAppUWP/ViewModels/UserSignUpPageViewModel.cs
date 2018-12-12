@@ -26,6 +26,20 @@ namespace ProjectCityAppUWP.ViewModels
         private SharedUser user = new SharedUser();
         private SharedCompany company = new SharedCompany();
 
+        #region Formcontrols
+        private List<bool> _formcontrol;
+        public List<bool> FormControl
+        {
+            get
+            {
+                return _formcontrol;
+            }
+            set
+            {
+                _formcontrol = value;
+                RaisePropertyChanged();
+            }
+        }
         private SolidColorBrush _formcontrol1 = new SolidColorBrush() { Color = Colors.DarkGray };
         public SolidColorBrush FormControl1
         {
@@ -86,14 +100,12 @@ namespace ProjectCityAppUWP.ViewModels
             get { return _formcontrol10; }
             set { _formcontrol10 = value; RaisePropertyChanged(); }
         }
-
         private SolidColorBrush _formcontrol11 = new SolidColorBrush() { Color = Colors.DarkGray };
         public SolidColorBrush FormControl11
         {
             get { return _formcontrol11; }
             set { _formcontrol11 = value; RaisePropertyChanged(); }
         }
-
         private SolidColorBrush _formcontrol12 = new SolidColorBrush() { Color = Colors.DarkGray };
         public SolidColorBrush FormControl12
         {
@@ -112,8 +124,9 @@ namespace ProjectCityAppUWP.ViewModels
             get { return _formcontrol14; }
             set { _formcontrol14 = value; RaisePropertyChanged(); }
         }
-       
+        #endregion
 
+        #region Properties
         public string Firstname
         {
             get { return user.FirstName; }
@@ -124,14 +137,11 @@ namespace ProjectCityAppUWP.ViewModels
             get { return user.LastName; }
             set { user.LastName = value; RaisePropertyChanged(); }
         }
-
-       
         public string UserName
         {
             get { return user.UserName; }
             set { user.UserName = value; RaisePropertyChanged(); }
         }
-
         private Visibility visible;
         public Visibility Visible
         {
@@ -142,12 +152,11 @@ namespace ProjectCityAppUWP.ViewModels
                 RaisePropertyChanged();
             }
         }
-
         public async void GetCategories()
         {
             HttpClient client = new HttpClient();
             string res = "";
-                res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Category"));
+            res = await client.GetStringAsync(new Uri("http://localhost:51070/api/Category"));
             categories = new ObservableCollection<SharedCategory>();
             foreach (var item in JsonConvert.DeserializeObject<List<SharedCategory>>(res))
             {
@@ -155,6 +164,7 @@ namespace ProjectCityAppUWP.ViewModels
             }
             RaisePropertyChanged("Categories");
         }
+        public int SelectedComboIndex { get; set; } = -1;
         private ObservableCollection<SharedCategory> categories = new ObservableCollection<SharedCategory>();
         public ObservableCollection<SharedCategory> Categories
         {
@@ -172,14 +182,12 @@ namespace ProjectCityAppUWP.ViewModels
             get { return user.Password; }
             set { user.Password = value; RaisePropertyChanged(); }
         }
-
         private string passwordConfirm;
         public string PasswordConfirm
         {
             get { return passwordConfirm; }
             set { passwordConfirm = value; RaisePropertyChanged(); }
         }
-
         private bool entrepreneur;
         public bool Entrepreneur
         {
@@ -192,8 +200,6 @@ namespace ProjectCityAppUWP.ViewModels
                 RaisePropertyChanged();
             }
         }
-
-
         public DateTimeOffset Birthday
         {
             get
@@ -222,7 +228,7 @@ namespace ProjectCityAppUWP.ViewModels
             set { this.company.Name = value; }
         }
 
-       
+
         public string CompanyStreet
         {
             get { return this.company.Street; }
@@ -249,7 +255,7 @@ namespace ProjectCityAppUWP.ViewModels
             }
         }
 
-        
+
         public string CompanyImage
         {
             get { return this.company.Image; }
@@ -265,8 +271,9 @@ namespace ProjectCityAppUWP.ViewModels
         public string CompanyDescription
         {
             get { return this.company.Description; }
-            set { this.company.Description = value; RaisePropertyChanged();}
-        }
+            set { this.company.Description = value; RaisePropertyChanged(); }
+        } 
+        #endregion
 
         public DelegateCommand BtnSignUp { get; set; }
 
@@ -276,21 +283,6 @@ namespace ProjectCityAppUWP.ViewModels
             Customer = true;
             BtnSignUp = new DelegateCommand(SignUp);
             FormControl = new List<bool>();
-        }
-
-        private List<bool> _formcontrol;
-        public List<bool> FormControl
-        {
-            get
-            {
-                return _formcontrol;
-            }
-            set
-            {
-                _formcontrol = value;
-                RaisePropertyChanged();
-
-            }
         }
 
         private async void SignUp()
@@ -392,9 +384,6 @@ namespace ProjectCityAppUWP.ViewModels
         {
             this.user.FK_CompanyID = default(Guid);
         }
-
-        public int SelectedComboIndex { get; set; } = -1;
-
 
     }
 }
